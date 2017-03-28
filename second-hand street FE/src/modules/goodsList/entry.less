@@ -1,0 +1,41 @@
+.page-content {
+    &.container {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    .area {
+        margin: 20px 0;
+        .col-xs-3 {
+            cursor: pointer;
+        }
+    }
+    .area-header {
+        color: #fff;
+        margin-bottom: 24px;
+        .page-title-wrap {
+            position: relative;
+            &:after {
+                content: '';
+                display: block;
+                width: 100%;
+                border-bottom: 1px dashed #4bc0a5;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                z-index: 1;
+            }
+        }
+        .page-title-icon {
+            margin-right: .5em;
+            font-size: 1em;
+        }
+        .page-title-content {
+            background-color: #4bc0a5;
+            padding: 8px 15px;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+    }
+}

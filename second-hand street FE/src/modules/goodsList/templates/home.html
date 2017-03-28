@@ -1,0 +1,40 @@
+<div class="page-content container">
+    <div class="col-xs-9 col-xs-offset-1">
+        <div class="area">
+            <div class="area-header text-center">
+                <h3 class="page-title-wrap">
+                    <span class="page-title-content"><i class="iconfont icon-xin text-red page-title-icon"></i>最新上架</span>
+                </h3>
+            </div>
+            <div class="row">
+                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.recentGoods">
+                    <image-reset img-data="item"></image-reset>
+                </div>
+            </div>
+        </div>
+        <div class="area">
+            <div class="area-header text-center">
+                <h3 class="page-title-wrap">
+                    <span class="page-title-content"><i class="iconfont icon-shoucangjia text-red page-title-icon"></i>收藏最多</span>
+                </h3>
+            </div>
+            <div class="row">
+                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.collectedMostGoods">
+                    <image-reset img-data="item"></image-reset>
+                </div>
+            </div>
+        </div>
+        <div class="area">
+            <div class="area-header text-center">
+                <h3 class="page-title-wrap">
+                    <span class="page-title-content"><i class="iconfont icon-kejian text-red page-title-icon"></i>浏览最多</span>
+                </h3>
+            </div>
+            <div class="row">
+                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.pvMostGoods">
+                    <image-reset img-data="item"></image-reset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

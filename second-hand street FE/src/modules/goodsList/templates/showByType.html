@@ -1,0 +1,23 @@
+<div class="page-content container">
+    <div class="col-xs-9 col-xs-offset-1">
+        <div class="area">
+            <div class="area-header">
+                <ul class=" breadcrumb">
+                    <li>
+                        <a ng-href="#/goods?type={{vm.firstLevel.value}}" ng-bind="vm.firstLevel.name"></a>
+                    </li>
+                    <li ng-if="vm.secondLevel.name">
+                        <a ng-bind="vm.secondLevel.name"
+                        ng-href="#/goods?type={{vm.firstLevel.value}}&subtype={{vm.secondLevel.value}}"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.goods">
+                    <image-reset img-data="item"></image-reset>
+                </div>
+            </div>
+        </div>
+        <ul uib-pagination previous-text="上一页" total-items="total" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true"></ul>
+    </div>
+</div>

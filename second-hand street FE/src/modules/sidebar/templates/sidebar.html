@@ -1,0 +1,18 @@
+<div class="sidebar">
+    <ul>
+        <li ng-repeat="type in ::vm.sidebarData track by $index"
+            ng-class="{active: vm.isCurrentType(type.value)}"
+            class="sidebarItem" ng-click="vm.junmpPageTo($event, type.value)">
+            <div>
+                <span ng-class="::type.icon"></span>
+                <strong ng-bind="::type.name"></strong>
+            </div>
+            <ul ng-if="::type.subMenu" class="subMenu">
+                <li ng-repeat="subItem in type.subMenu track by $index"
+                ng-click="vm.junmpPageTo($event, type.value, subItem.value)"
+                ng-class="{active: vm.isCurrentSubtype(type.value, subItem.value)}"
+                ng-bind="::subItem.name"></li>
+            </ul>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,13 @@
+<div class="thumbnail">
+    <div class="goods-cover">
+        <img ng-src="{{imgData.cover}}" alt="{{imgData.title}}">
+    </div>
+    <div class="caption">
+        <h4 class="goods-title" ng-bind="imgData.title" title="{{imgData.title}}"></h4>
+        <h4 class="goods-price">价格：<span class="text-red" ng-bind="imgData.price | currency: '￥'"></span></h4>
+        <p>
+            <span class="iconfont icon-shoucangjia text-yellow"></span>（{{imgData.num}}） &nbsp;&nbsp;
+            <span class="iconfont icon-kejian text-blue"></span>（{{imgData.pv}}）
+        </p>
+    </div>
+</div>
