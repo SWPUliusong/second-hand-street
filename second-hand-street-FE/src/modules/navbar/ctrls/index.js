@@ -5,8 +5,9 @@ export default [
     '$scope',
     '$http',
     '$document',
+    'goodsService',
     'UibModalReset',
-    function ($scope, $http, $document, UibModalReset) {
+    function ($scope, $http, $document, goodsService, UibModalReset) {
         let vm = $scope.vm = {
             isShowFeedback: false
         }
@@ -24,10 +25,8 @@ export default [
             }
 
             // 实时反馈
-            $http
-                .post('/api/intellisense', {
-                    keyword: params.keyword
-                })
+            goodsService
+                .keyword(params.keyword)
                 .success(function (res) {
                     if (res.length) {
                         vm.isShowFeedback = true

@@ -10,17 +10,16 @@
 }
 
 .sidebar {
-    background-color: #373B3E;
+    background-color: @white;
     height: 100%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    padding-top: 68px;
+    padding-top: @navbarH;
     width: @menuWidth;
     .sidebarItem {
         font-size: @font-size;
-        color: #adadad;
         cursor: pointer;
         position: relative;
         div {
@@ -29,26 +28,26 @@
             text-align: center;
             position: relative;
             z-index: 100;
-            background-color: #373B3E;
+            background-color: @white;
         }
         span {
             font-size: 1.5 * @font-size;
             float: left;
         }
         strong {
-            font-weight: normal;
+            font-size: 16px;
             vertical-align: sub;
             vertical-align: -webkit-baseline-middle;
         }
         &:hover, &.active {
             div {
-                background-color: #000;
+                background-color: @green;
             }
             span{
-                color: #ff0000;
+                color: @red;
             }
             strong {
-                color: #fdfd90;
+                color: @yellow;
             }
         }
         &:hover .subMenu {
@@ -59,12 +58,12 @@
             z-index: 10;
             top: 0;
             left: -40px;
-            background-color: #ea3434;
+            background-color: @red;
             width: @menuWidth + 40px;
             height: 100%;
             padding: 12px 0;
             transition: left 0.5s;
-            color: #fdfd90;
+            color: @yellow;
             .clearfix();
             li {
                 text-align: center;

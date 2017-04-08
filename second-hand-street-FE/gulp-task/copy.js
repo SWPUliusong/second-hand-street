@@ -17,8 +17,8 @@ let assets = {
             .pipe(plumber())
             .pipe(gulp.dest(config.IMAGES))
     },
-    template(event, rename) {
-        return gulp.src(event)
+    template(paths, rename) {
+        return gulp.src(paths)
             .pipe(plumber())
             .pipe(rename)
             .pipe(gulp.dest(config.TEMPLATES))

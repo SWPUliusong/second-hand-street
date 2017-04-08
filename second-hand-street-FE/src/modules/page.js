@@ -5,9 +5,8 @@ import 'uiBootstrap'
 import 'Upload'
 import 'UploadShim'
 import './common/entry'
-import './navbar/entry'
-import './sidebar/entry'
 import './goodsList/entry'
+import './reading'
 
 angular
     .module('app', [
@@ -15,9 +14,8 @@ angular
         'ui.bootstrap',
         'ngFileUpload',
         'app.common',
-        'app.navbar',
-        'app.sidebar',
         'app.goodsList',
+        'app.reading'
     ])
     .constant('httpConfig', {
         NAME: 'second-hand-street',
@@ -56,6 +54,9 @@ angular
                 });
             });
         }
-    ]);
+    ])
+    .directive('navbar', require('./navbar'))
+    .directive('sidebar', require('./sidebar'))
+    .directive('footer', require('./footer'))  
 
 angular.bootstrap(document, ['app'])

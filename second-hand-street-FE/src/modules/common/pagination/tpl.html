@@ -1,0 +1,12 @@
+<div class="text-center">
+    <ul uib-pagination 
+        previous-text="上一页"
+        next-text="下一页"
+        total-items="pageValue.total"
+        ng-model="params.page"
+        max-size="3"
+        class="pagination-md"
+        items-per-page="pageValue.num || 16"
+        boundary-link-numbers="true"
+        rotate="true"></ul>
+</div>

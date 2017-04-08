@@ -1,22 +1,21 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar bg-white navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <h3 class="text-center" ui-sref="goods.home">
+            <h3 class="text-center text-green text-bold" ui-sref="goods.home">
                 校内二手街<br>
-                <small>最方便的校内二手市场</small>
-            </h3 class>
-            <!--<a class="navbar-brand" ui-sref="goods.home">校园二手街</a>-->
+                <small class="text-orange">最方便的校内二手市场</small>
+            </h3>
         </div>
         <div class="navbar-form search-form">
-            <span class="glyphicon glyphicon-search"></span>
+            <span class="text-green glyphicon glyphicon-search"></span>
             <input type="text" ng-model="params.keyword" class="form-control" ng-keyup="vm.search($event)" placeholder="搜索">
             <ul class="intellisense" ng-if="vm.isShowFeedback">
                 <li ng-repeat="good in vm.goods track by $index">
-                    <a ng-click="params.keyword=null" ui-sref="goods.details({id: {{good._id}}})">{{good.name}}</a>
+                    <a ng-click="params.keyword=null" ui-sref="goods.details({id: {{good._id}}})">{{good.title}}</a>
                 </li>
             </ul>
         </div>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav text-bigger">
             <li uib-dropdown id="user-menu" ng-if="vm.isLogin">
                 <a href="#" uib-dropdown-toggle>
                     用户 <span class="caret"></span>
@@ -32,8 +31,8 @@
             <li ng-if="vm.isLogin">
                 <button class="btn btn-publish" ng-click="vm.publishModal()">我要发布</button>
             </li>
-            <li ng-if="!vm.isLogin" ng-click="vm.loginModal()"><a>登录</a></li>
-            <li ng-if="!vm.isLogin" ng-click="vm.registerModal()"><a>注册</a></li>
+            <li ng-if="!vm.isLogin" ng-click="vm.loginModal()" class="cursor-pointer text-green">登录</li>
+            <li ng-if="!vm.isLogin" ng-click="vm.registerModal()" class="cursor-pointer text-green">注册</li>
         </ul>
     </div>
 </div>

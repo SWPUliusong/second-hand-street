@@ -1,5 +1,16 @@
 <div class="page-content container">
     <div class="col-xs-9 col-xs-offset-1">
+        <div class="area bg-white">
+            <h4 class="text-green text-bold"><i class="glyphicon glyphicon-list-alt"></i> 推荐阅读</h4>
+            <p class="read-content row clearfix">
+                <span class="col-xs-6">
+                    <a class="text-muted" ui-sref="reading.rules">商品发布规则</a>
+                </span>
+                <span class="col-xs-6">
+                    <a class="text-muted" ui-sref="reading.iphone">购买二手iPhone注意事项</a>
+                </span>
+            </p>
+        </div>
         <div class="area">
             <div class="area-header text-center">
                 <h3 class="page-title-wrap">
@@ -8,7 +19,7 @@
             </div>
             <div class="row">
                 <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.recentGoods">
-                    <image-reset img-data="item"></image-reset>
+                    <img-reset img-data="item"></img-reset>
                 </div>
             </div>
         </div>
@@ -20,7 +31,7 @@
             </div>
             <div class="row">
                 <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.collectedMostGoods">
-                    <image-reset img-data="item"></image-reset>
+                    <img-reset img-data="item"></img-reset>
                 </div>
             </div>
         </div>
@@ -32,7 +43,7 @@
             </div>
             <div class="row">
                 <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.pvMostGoods">
-                    <image-reset img-data="item"></image-reset>
+                    <img-reset img-data="item"></img-reset>
                 </div>
             </div>
         </div>

@@ -37,7 +37,7 @@ export default [
 
             let modalInstance = $uibModal.open({
                 size: size,
-                templateUrl: 'templates/common/popup/modal-alert.html',
+                templateUrl: 'templates/common/uibModalResetService/tpl.html',
                 backdrop: !!opts.backdrop,
                 keyboard: !!opts.keyboard,
                 scope: newScope,

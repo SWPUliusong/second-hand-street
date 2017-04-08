@@ -1,7 +1,7 @@
 .navbar {
     padding-left: ~"calc(100vw - 100%)";
-    box-shadow: 0 3px 3px #666;
-    height: 68px;
+    box-shadow: 0 3px 3px #c8c8c8;
+    height: @navbarH;
     .container {
         height: 100%;
         width: 1200px;
@@ -45,15 +45,19 @@
     span {
         position: absolute;
         left: 12px;
-        top: 8px;
-        font-size: 24px;
-        color: #d1d6e4;
+        top: 10px;
+        font-size: 20px;
     }
     input[type="text"] {
         height: 40px;
         border-radius: 20px;
         width: 350px;
         padding-left: 44px;
+        border-color: @green;
+        font-size: 18px;
+        &.form-control:focus {
+            border-color: #66afe9;
+        }
     }
     .intellisense {
         position: absolute;

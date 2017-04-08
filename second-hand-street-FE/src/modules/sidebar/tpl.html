@@ -4,8 +4,8 @@
             ng-class="{active: vm.isCurrentType(type.value)}"
             class="sidebarItem" ng-click="vm.junmpPageTo($event, type.value)">
             <div>
-                <span ng-class="::type.icon"></span>
-                <strong ng-bind="::type.name"></strong>
+                <span class="text-green" ng-class="::type.icon"></span>
+                <strong class="text-init" ng-bind="::type.name"></strong>
             </div>
             <ul ng-if="::type.subMenu" class="subMenu">
                 <li ng-repeat="subItem in type.subMenu track by $index"

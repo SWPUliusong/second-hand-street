@@ -1,17 +1,25 @@
-import htmlCompile from './directives/htmlCompile'
-import imageReset from './directives/imageReset'
-import footer from './directives/footer'
+import typeData from './constant/typeData'
+import htmlCompile from './htmlCompile'
+import imgReset from './imgReset'
 import trustHtml from './filters/trustHtmlFilter'
 import goodsService from './services/goodsService'
-import UibModalReset from './services/UibModalResetService'
+import userService from './services/userService'
+import validService from './services/validService'
+import commentService from './services/commentService'
+import UibModalReset from './uibModalResetService'
 import HttpRequestInterception from './services/HttpRequestInterception'
 
 angular
     .module('app.common', [])
+    .constant('typeData', typeData)
     .directive('htmlCompile', htmlCompile)
-    .directive('imageReset', imageReset)
-    .directive('footer', footer)
+    .directive('imgReset', imgReset)
     .filter('trustHtml', trustHtml)
-    .service('HttpRequestInterception', HttpRequestInterception)
-    .service('UibModalReset', UibModalReset)
     .service('goodsService', goodsService)
+    .service('userService', userService)
+    .service('validService', validService)
+    .service('commentService', commentService)
+    .service('UibModalReset', UibModalReset)
+    .service('HttpRequestInterception', HttpRequestInterception)
+    .service('util', require("./services/util"))
+    .directive('pagination', require('./pagination'))
