@@ -1,6 +1,7 @@
 export default [
     '$http',
-    function ($http) {
+    '$rootScope',
+    function ($http, $rootScope) {
         // 确认邮箱是否注册
         this.email = function(data) {
             return $http({
@@ -17,6 +18,14 @@ export default [
                 method: 'POST_HAL',
                 data
             })
+        }
+
+        // 验证用户是否未过期
+        this.user = function() {
+            return $http({
+                url: '/valid/users',
+                method: 'GET_HAL'
+            }).then(res => $rootScope.user = res.data)
         }
     }
 ]

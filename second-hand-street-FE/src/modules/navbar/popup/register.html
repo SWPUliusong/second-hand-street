@@ -1,0 +1,42 @@
+<form class="form-horizontal bg-green register text-white" ng-submit="submit()">
+    <div class="form-group">
+        <label class="sr-only control-label col-xs-2 font-normal text-right">昵称</label>
+        <div class="col-xs-8">
+            <input class="form-control input-lg text-green" type="text" ng-model="params.name" placeholder="昵称">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="sr-only control-label col-xs-2 font-normal text-right">邮箱</label>
+        <div class="col-xs-8">
+            <input type="text"
+            ng-class="vm.validEmail ? 'text-green' : 'text-red'"
+            class="form-control input-lg"
+            ng-blur="vm.validRepeat()"
+            ng-model="params.email" placeholder="邮箱">
+        </div>
+    </div>
+    <div class="form-group" ng-if="vm.emailRepeat">
+        <span class="col-xs-12 font-normal text-center text-red">邮箱已注册</label>
+    </div>
+    <div class="form-group">
+        <label class="sr-only control-label col-xs-2 font-normal text-right">密码</label>
+        <div class="col-xs-8">
+            <input class="form-control input-lg text-green" 
+            ng-class="vm.validPassword ? 'text-green' : 'text-red'"
+            type="password" ng-model="params.password" placeholder="密码(至少6位)">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="sr-only control-label col-xs-2 font-normal text-right">确认密码</label>
+        <div class="col-xs-8">
+            <input class="form-control input-lg text-green"
+            ng-class="params.password === vm.password ? 'text-green' : 'text-red'"
+            type="password" ng-model="vm.password" placeholder="确认密码">
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" 
+        ng-disabled="!params.name || !vm.validEmail || !vm.validPassword || params.password !== vm.password" 
+        class="register-btn btn bg-orangelight">注册二手街</button>
+    </div>
+</form>

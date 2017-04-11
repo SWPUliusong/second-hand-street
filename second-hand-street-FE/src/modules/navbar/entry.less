@@ -12,15 +12,12 @@
             display: none;
         }
     }
-    .dropdown-menu{
-        top: 62px;
-        *{
-            text-align: center;
-        }
-    }
 }
 
-#user-menu {
+.user-menu {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
     ul {
         padding: 0;
         font-size: 18px;
@@ -31,15 +28,35 @@
         a {
             padding: 8px 20px;
         }
-        background-color: #fff2c7;
     }
     .divider {
         margin: 0;
     }
+    .dropdown-menu{
+        top: @navbarH - 3px;
+        left: -49px;
+        *{
+            text-align: center;
+        }
+    }
+    .dropdown-toggle {
+        display: table-cell;
+        padding: 0;
+        border-radius: 50%;
+        overflow: hidden;
+        .shadow-wrap(@blue);
+    }
+    &:hover .dropdown-menu {
+        display: block;
+    }
+}
+img.user-avatar {
+    @h: 60px;
+    width: @h;
+    height: @h; 
 }
 
 .search-form {
-    // margin-left: 300px;
     padding: 0;
     position: relative;
     span {
@@ -63,19 +80,20 @@
         position: absolute;
         top: 41px;
         left: 20px;
-        background-color: #f3f3f3;
-        list-style: none;
+        background-color: fade(@black, 80%);
         width: 310px;
-        padding: 0;
-        margin: 0;
         a {
             display: block;
             text-decoration: none;
             &:hover {
-                background-color: #64CBB3;
+                background-color: @green;
+                color: @white;
             }
             padding: 5px 10px;
             font-size: 16px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 }
@@ -93,5 +111,58 @@
     }
     &:focus {
         outline: none;
+    }
+}
+
+.logo-header {
+    @l: 80px;
+    padding: 30px 0;
+    img {
+        width: @l;
+        height: @l;
+    }
+    h3 {
+        font-family: '宋体';
+        margin-top: 17px;
+    }
+}
+
+.login, .register {
+    padding: 30px 0;
+    .text-white {
+        font-family: @family;
+    }
+    .form-control {
+        border-radius: 17px;
+        text-align: center;
+    }
+    .login-btn {
+        font-family: '宋体';
+        font-size: 20px;
+        padding: 8px 56px;
+        border-radius: 23px;
+        .hover-init(@orange);
+        &[disabled]:hover {
+            color: inherit;
+        }
+    }
+}
+.forget-password {
+    .hover-init(@orange);
+}
+.register {
+    .form-control {
+        border-radius: 23px;
+        font-size: 16px;
+    }
+    .register-btn {
+        font-family: '楷体';
+        font-size: 21px;
+        padding: 8px 80px;
+        border-radius: 24px;
+        .hover-init(@red);
+        &[disabled]:hover {
+            color: inherit;
+        }
     }
 }

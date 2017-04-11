@@ -1,14 +1,27 @@
-<div class="form-horizontal">
+<form class="form-horizontal bg-green login text-white" ng-submit="submit()">
     <div class="form-group">
-        <label class="control-label col-xs-4">email</label>
-        <div class="col-xs-8">
-            <input type="text" ng-model="params.email">
+        <label class="control-label col-xs-4 font-normal text-right">邮箱</label>
+        <div class="col-xs-6">
+            <input class="form-control" 
+            ng-class="{'text-red': !vm.validEmail}"
+            type="text" ng-model="params.email">
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-4">密码</label>
-        <div class="col-xs-8">
-            <input type="password" ng-model="params.password">
+        <label class="control-label col-xs-4 font-normal text-right">密码</label>
+        <div class="col-xs-6">
+            <input class="form-control" type="password" ng-model="params.password">
         </div>
     </div>
-</div>
+    <div class="form-group">
+        <label class="col-xs-5 font-normal text-right" title="账号密码会保存在本地一个星期">
+            <input type="checkbox" ng-model="vm.remember"> 记住密码
+        </label>
+        <div class="col-xs-5 text-right">
+            <a ng-click="vm.resetPassword()" class="text-white forget-password">忘记密码</a>
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" ng-disabled="!vm.validEmail || !params.password" class="login-btn btn bg-greenlight">登录二手街</button>
+    </div>
+</form>

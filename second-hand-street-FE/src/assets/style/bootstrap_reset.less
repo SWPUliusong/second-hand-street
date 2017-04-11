@@ -7,6 +7,15 @@ body {
   padding: @navbarH 0 200px 160px;
   position: relative;
 }
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+    color: inherit;         
+}
 .thumbnail {
   padding: 0;
 }
@@ -17,4 +26,28 @@ body {
 
 .pagination li a {
   margin-left: 10px;
+}
+
+.modal-reset() {
+  padding: 0;
+  border: none;
+}
+.modal-content {
+  .modal-reset();
+  border-radius: 0;
+}
+.modal-sm {
+  width: 412px !important;
+}
+.modal-header {
+  position: relative;
+  .modal-reset();
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+.modal-body {
+  .modal-reset();
 }

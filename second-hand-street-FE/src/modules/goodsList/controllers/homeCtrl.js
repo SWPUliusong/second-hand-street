@@ -1,7 +1,8 @@
 export default [
+    'util',
     '$scope',
     'goodsService',
-    function ($scope, goodsService) {
+    function (util, $scope, goodsService) {
         let vm = $scope.vm = {}
 
         Promise

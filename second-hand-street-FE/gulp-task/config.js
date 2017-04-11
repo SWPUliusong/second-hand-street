@@ -62,11 +62,10 @@ module.exports = {
             module: {
                 loaders: [
                     {
-                        test: /\.js/,
+                        test: /\.js$/,
                         loader: 'babel',
                         exclude: './node_modules',
-                        includes: './src/modules',
-                        query: {presets: 'es2015'}
+                        query: {"presets": ["es2015"]}
                     }
                 ]
             }
@@ -89,9 +88,10 @@ module.exports = {
             module: {
                 loaders: [
                     {
-                        test: /\.js/,
+                        test: /\.js$/,
                         loader: 'babel',
-                        query: {presets: 'es2015'}
+                        exclude: './node_modules',
+                        query: {"presets": ["es2015"]}
                     }
                 ]
             }

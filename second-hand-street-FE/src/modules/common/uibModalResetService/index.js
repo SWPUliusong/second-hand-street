@@ -19,7 +19,7 @@ export default [
         self.showModal = function (opts) {
             let newScope = $rootScope.$new()
 
-            _.forEach(['title', 'message', 'template'], val => {
+            _.forEach(['message', 'template'], val => {
                 if (opts[val]) {
                     newScope[val] = opts[val]
                 }
@@ -31,9 +31,21 @@ export default [
                 })
             }
 
+            let urlRegExp = /^\.\/templates(\/\S+)+\.html$/
+            if (opts.title && urlRegExp.test(opts.title)) {
+                getTemplateAsync(opts.title).then(function (success) {
+                    newScope['title'] = success.data;
+                })
+            } else {
+                newScope[title] = opts[title]
+            }
+
             let size = newScope.size = _.includes(['lg', 'md', 'sm'], opts.size) ? opts.size : 'md'
 
-            newScope.needBottomBtn = !!opts.needBottomBtn
+            // 模态框footer部分的按钮
+            newScope.needBtn = !!opts.needBtn
+            // 右上角X按钮
+            newScope.needClose = !!opts.needClose
 
             let modalInstance = $uibModal.open({
                 size: size,
@@ -59,7 +71,7 @@ export default [
                 message: msg,
                 backdrop: true,
                 keyboard: true,
-                needBottomBtn: false
+                needBtn: false
             }, opts))
         }
 
@@ -67,7 +79,8 @@ export default [
             return self.showModal({
                 title: title,
                 message: msg,
-                needBottomBtn: true
+                keyboard: true,
+                needBtn: true
             }, opts)
         }
     }

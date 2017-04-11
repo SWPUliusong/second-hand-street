@@ -18,48 +18,94 @@ table { border-collapse:collapse; border-spacing:0; }
 
 @navbarH: 86px;     // 导航条高度
 
+@family: 'Helvetica Neue', Helvetica, "Hiragino Sans GB", /*"PMingLiU",*/ "Microsoft YaHei", "SimSun", Arial, Sans-serif;
+
+@init: #666;
 @green: #4bc0a5;
+@greenlight: #6cdebe;
 @red: #ea3434;
 @blue: #0087ca;
 @orange: #ffb300;
+@orangelight: #ffbe29;
 @white: #ffffff;
 @yellow: #fdfd90;
+@black: #3F495B;
 
 .border(bottom, @rest...) {
   border-bottom: @rest;
 }
+.bg(@color) {
+  background-color: @color;
+}
+.text(@color) {
+  color: @color;
+}
+.hover-init(@color) {
+  &:hover {
+    text-decoration: none;
+    color: @color;
+  }
+}
+.shadow-wrap(@color) {
+  @x: 2px;
+  @y: 2px;
+  @m: 4px;
+  @clr: fade(@color, 40%);
+  box-shadow: @x @y @m @clr, -@x -@y @m @clr, @x -@y @m @clr, -@x @y @m @clr;
+}
 
 
+.bg-green {
+  .bg(@green);
+}
+.bg-greenlight {
+  .bg(@greenlight);
+}
+.bg-white {
+  .bg(@white);
+}
+.bg-black {
+  .bg(@black);
+}
+.bg-orange {
+  .bg(@orange);
+}
+.bg-orangelight {
+  .bg(@orangelight);
+}
 
 .text-green {
-  color: @green;
+  .text(@green);
 }
-.bg-green {
-  background-color: @green;
-}
-
-.bg-white {
-  background-color: @white;
-}
-
 .text-init {
-  color: #666;
+  .text(@init);
 }
 .text-red {
-  color: @red;
+  .text(@red);
 }
 .text-blue {
-  color: @blue;
+  .text(@blue);
 }
 .text-orange {
-  color: @orange;
+  .text(@orange);
 }
-.text-bold {
+.text-yellow {
+  .text(@yellow);
+}
+.text-white {
+  .text(@white);
+}
+
+.font-bold {
   font-weight: bold;
 }
-.text-bigger {
+.font-normal {
+  font-weight: normal;
+}
+.font-bigger {
   font-size: 1.2em;
 }
+
 .cursor-pointer {
   cursor: pointer;
   padding: 15px;

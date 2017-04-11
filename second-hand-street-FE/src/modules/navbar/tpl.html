@@ -1,7 +1,7 @@
 <div class="navbar bg-white navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <h3 class="text-center text-green text-bold" ui-sref="goods.home">
+            <h3 class="text-center text-green font-bold" ui-sref="goods.home">
                 校内二手街<br>
                 <small class="text-orange">最方便的校内二手市场</small>
             </h3>
@@ -11,28 +11,36 @@
             <input type="text" ng-model="params.keyword" class="form-control" ng-keyup="vm.search($event)" placeholder="搜索">
             <ul class="intellisense" ng-if="vm.isShowFeedback">
                 <li ng-repeat="good in vm.goods track by $index">
-                    <a ng-click="params.keyword=null" ui-sref="goods.details({id: {{good._id}}})">{{good.title}}</a>
+                    <a class="text-white" ng-click="params.keyword=null" ui-sref="goods.details({id: {{good._id}}})">{{good.title}}</a>
                 </li>
             </ul>
         </div>
-        <ul class="nav navbar-nav text-bigger">
-            <li uib-dropdown id="user-menu" ng-if="vm.isLogin">
-                <a href="#" uib-dropdown-toggle>
-                    用户 <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" uib-dropdown-menu>
-                    <li><a href="#"><span class="text-info glyphicon glyphicon-user"></span>个人信息</a></li>
-                    <li><a href="#"><span class="text-danger glyphicon glyphicon-heart"></span>我的收藏</a></li>
-                    <li><a href="#"><span class="text-success glyphicon glyphicon-envelope"></span>消息中心</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#"><span class="text-danger glyphicon glyphicon-off"></span>退出</a></li>
-                </ul>
-            </li>
-            <li ng-if="vm.isLogin">
-                <button class="btn btn-publish" ng-click="vm.publishModal()">我要发布</button>
-            </li>
-            <li ng-if="!vm.isLogin" ng-click="vm.loginModal()" class="cursor-pointer text-green">登录</li>
-            <li ng-if="!vm.isLogin" ng-click="vm.registerModal()" class="cursor-pointer text-green">注册</li>
+        <div uib-dropdown class="user-menu" ng-if="!!user">
+            <a uib-dropdown-toggle>
+                <img class="user-avatar" ng-src="{{user.avatar}}" alt="{{user.name}}">
+            </a>
+            <ul class="dropdown-menu bg-white" uib-dropdown-menu>
+                <li>
+                    <a><span class="text-blue glyphicon glyphicon-user"></span>个人信息</a>
+                </li>
+                <li>
+                    <a><span class="text-orange glyphicon glyphicon-heart"></span>我的收藏</a>
+                </li>
+                <li>
+                    <a><span class="text-green glyphicon glyphicon-envelope"></span>消息中心</a>
+                </li>
+                <li ng-click="vm.publish()">
+                    <a><span class="text-orange glyphicon glyphicon-cloud-upload"></span>我要发布</a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li ng-click="vm.logout()">
+                    <a><span class="text-red glyphicon glyphicon-off"></span>退出</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav font-bigger" ng-if="!user">
+            <li ng-click="vm.login()" class="cursor-pointer text-green">登录</li>
+            <li ng-click="vm.register()" class="cursor-pointer text-green">注册</li>
         </ul>
     </div>
 </div>

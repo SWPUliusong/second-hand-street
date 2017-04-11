@@ -44,19 +44,23 @@ angular
         }
     ])
     .run([
+        'util',
         '$rootScope',
+        'validService',
         'UibModalReset',
-        function ($rootScope, UibModalReset) {
+        function (util, $rootScope, validService, UibModalReset) {
+            validService.user();
 
             $rootScope.$on("$stateChangeStart", function (event, toState) {
                 _.forEach(UibModalReset.current, function (modal) {
                     modal.dismiss();
                 });
+                util.scrollTo(0, 0)
             });
         }
     ])
     .directive('navbar', require('./navbar'))
     .directive('sidebar', require('./sidebar'))
-    .directive('footer', require('./footer'))  
+    .directive('footer', require('./footer'))
 
 angular.bootstrap(document, ['app'])

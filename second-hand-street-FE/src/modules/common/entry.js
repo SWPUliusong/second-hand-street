@@ -1,4 +1,5 @@
 import typeData from './constant/typeData'
+import code from './constant/code'
 import htmlCompile from './htmlCompile'
 import imgReset from './imgReset'
 import trustHtml from './filters/trustHtmlFilter'
@@ -12,6 +13,8 @@ import HttpRequestInterception from './services/HttpRequestInterception'
 angular
     .module('app.common', [])
     .constant('typeData', typeData)
+    .constant('Code', code)
+    .constant('regExp', require('./constant/regExp'))
     .directive('htmlCompile', htmlCompile)
     .directive('imgReset', imgReset)
     .filter('trustHtml', trustHtml)
@@ -22,4 +25,5 @@ angular
     .service('UibModalReset', UibModalReset)
     .service('HttpRequestInterception', HttpRequestInterception)
     .service('util', require("./services/util"))
+    .service('store', require("./services/storeService"))
     .directive('pagination', require('./pagination'))
