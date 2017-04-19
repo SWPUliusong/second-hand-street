@@ -1,0 +1,26 @@
+{
+    "_id": "123456789",
+    "owner": {
+        "_id": "52243634663",
+        "name": "王五",
+        "qq": 1242142151,
+        "tel": 13212345678,
+        "avatar": "http://ol5140dkq.bkt.clouddn.com/Fom5nX-UEo1VJdSK0aQkMwky2NtJ"
+    },
+    "images": [
+        "http://ol5140dkq.bkt.clouddn.com/183622377cc7ae0466935e064b505106d367e91f232fa-FfMYB5_fw658.jpg",
+        "http://ol5140dkq.bkt.clouddn.com/5ac4b99502b2bc454eb5305514aa87edf395388b93b86-EkXROi_fw658.jpg",
+        "http://ol5140dkq.bkt.clouddn.com/183622377cc7ae0466935e064b505106d367e91f232fa-FfMYB5_fw658.jpg",
+        "http://ol5140dkq.bkt.clouddn.com/5ac4b99502b2bc454eb5305514aa87edf395388b93b86-EkXROi_fw658.jpg"
+    ],
+    "place": "食堂",
+    "details": "九成新,功能强大,表面无任何损伤,实在是太牛逼啦",
+    "status": 0,
+    "pv": 100,
+    "title": "iphone6 plus",
+    "publishTime": "Mon Apr 03 2017 23:20:14 GMT+0800",
+    "price": 5000,
+    "num": 200,
+    "type": "electronic-product",
+    "subtype": "phone"
+}

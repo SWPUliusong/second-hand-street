@@ -1,0 +1,27 @@
+<div class="bg-white padding-15">
+    <div class="changeStatus">
+        <span ng-click="vm.changeRead()">
+            <button class="btn pedding" ng-class="{active: params.isRead===false}">未读消息</button>
+            <button class="btn resolve" ng-class="{active: params.isRead!==false}">全部消息</button>
+        </span>
+    </div>
+    <div ng-if="vm.message && vm.message.length > 0">
+        <div class="area">
+            <ul class="list-group">
+                <li ng-repeat="item in vm.message" class="list-group-item">
+                    <div class="clearfix">
+                        <span ui-sref="user({id: {{item.from._id}}})" class="h4 text-green">{{item.from.name}}</span>
+                        <i class="text-orange glyphicon glyphicon-share-alt"></i>
+                        <button ui-sref="goods.details({id: {{item.gid}}})" class="btn msg-btn">前往现场</button>
+                        <time class="pull-right">{{item.publishTime | date: 'yyyy-MM-dd HH:mm:ss'}}</time>
+                    </div>
+                    <p>{{item.content}}</p>
+                </li>
+            </ul>
+        </div>
+        <pagination></pagination>
+    </div>
+    <div ng-if="!vm.message || vm.message.length < 1" class="text-center padding-15">
+        {{params.isRead===false?'没有未读的消息':'暂时没有消息'}}
+    </div>
+</div>

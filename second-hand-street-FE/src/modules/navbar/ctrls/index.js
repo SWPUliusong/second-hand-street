@@ -1,6 +1,6 @@
 import loginCtrl from './popup/loginCtrl'
 import registerCtrl from './popup/registerCtrl'
-import publishGoods from './popup/publishGoods'
+let publishCtrl = require("./popup/publishCtrl")
 
 export default [
     '$scope',
@@ -63,24 +63,6 @@ export default [
                 })
         }
 
-        // 发布商品
-        vm.publish = function () {
-            UibModalReset
-                .showModal({
-                    title: '<p class="text-center">发布商品</p>',
-                    size: 'sm',
-                    backdrop: true,
-                    keyboard: true,
-                    controller: publishGoods,
-                    templateUrl: './templates/navbar/popup/publishModal.html'
-                })
-                .catch(function (res) {
-                    // 
-                    // Error catch
-                    // 
-                })
-        }
-
         // 退出
         vm.logout = function () {
             userService
@@ -101,6 +83,21 @@ export default [
                     backdrop: true,
                     templateUrl: './templates/navbar/popup/register.html',
                     controller: registerCtrl
+                })
+                .catch(err => {
+                    // 
+                    // Error catch
+                    // 
+                })
+        }
+
+        vm.publish = function () {
+            UibModalReset
+                .showModal({
+                    title: './templates/navbar/popup/title.html',
+                    backdrop: true,
+                    templateUrl: './templates/navbar/popup/publish.html',
+                    controller: publishCtrl
                 })
                 .catch(err => {
                     // 

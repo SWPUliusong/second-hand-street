@@ -1,0 +1,42 @@
+<div class="bg-white padding-15">
+    <div class="changeStatus">
+        <span ng-click="(params.page=1) && (params.status = [1, 0][params.status])">
+            <button class="btn pedding" ng-class="{active: params.status==0}">正在出售</button>
+            <button class="btn resolve" ng-class="{active: params.status==1}">已经售出</button>
+        </span>
+    </div>
+    <div ng-if="vm.goods && vm.goods.length > 0">
+        <div class="area">
+            <div class="area-header text-center">
+                <h3 class="page-title-wrap">
+                    <span ng-class="{'list-header': params.status==1}" class="page-title-content">
+                        {{params.status==0?'正在出售':'已经售出'}}
+                    </span>
+                </h3>
+            </div>
+            <div class="row">
+                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.goods">
+                    <div class="opt-btn" ng-if="params.status==0">
+                        <span title="修改商品" ng-click="vm.edit($event, item)">
+                            <i class="text-orange glyphicon glyphicon-pencil"></i>
+                        </span>
+                        <span title="确认商品售出" ng-click="vm.soldOut($event, item)">
+                            <i class="text-green glyphicon glyphicon-circle-arrow-up"></i>
+                        </span>
+                        <span title="删除商品" ng-click="vm.delete($event, item)">
+                            <i class="text-red glyphicon glyphicon-trash"></i>
+                        </span>
+                    </div>
+                    <span ng-if="params.status==1" title="删除商品" class="sold-out" ng-click="vm.delete($event, item)">
+                        <i class="text-red glyphicon glyphicon-trash"></i>
+                    </span>
+                    <img-reset img-data="item"></img-reset>
+                </div>
+            </div>
+        </div>
+        <pagination></pagination>
+    </div>
+    <div ng-if="!vm.goods || vm.goods.length < 1" class="text-center padding-15">
+        {{params.status==0?'暂时没有正在出售的商品':'暂时没有商品售出'}}
+    </div>
+</div>

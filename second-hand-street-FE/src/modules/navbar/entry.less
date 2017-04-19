@@ -136,15 +136,15 @@ img.user-avatar {
         border-radius: 17px;
         text-align: center;
     }
-    .login-btn {
-        font-family: '宋体';
-        font-size: 20px;
-        padding: 8px 56px;
-        border-radius: 23px;
-        .hover-init(@orange);
-        &[disabled]:hover {
-            color: inherit;
-        }
+}
+.login-btn {
+    font-family: '宋体';
+    font-size: 20px;
+    padding: 8px 56px;
+    border-radius: 23px;
+    .hover-init(@orange);
+    &[disabled]:hover {
+        color: inherit;
     }
 }
 .forget-password {
@@ -155,14 +155,27 @@ img.user-avatar {
         border-radius: 23px;
         font-size: 16px;
     }
-    .register-btn {
-        font-family: '楷体';
-        font-size: 21px;
-        padding: 8px 80px;
-        border-radius: 24px;
-        .hover-init(@red);
-        &[disabled]:hover {
-            color: inherit;
-        }
+}
+.register-btn {
+    font-family: '楷体';
+    font-size: 21px;
+    padding: 8px 80px;
+    border-radius: 24px;
+    .hover-init(@red);
+    &[disabled]:hover {
+        color: inherit;
     }
+}
+
+.publish {
+    padding: 30px 0;
+    .sold-out {
+        background: @gray;
+    }
+}
+
+.img-list {
+    padding: 0 15px;
+    max-height: 150px;
+    overflow: hidden
 }

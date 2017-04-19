@@ -1,0 +1,24 @@
+<div class="owner-content bg-white">
+    <h4 class="content-title">账户信息</h4>
+    <div class="row content-item">
+        <div class="col-xs-1">账号: </div>
+        <div class="col-xs-2">{{user.email}}</div>
+    </div>
+
+    <h4 class="content-title clearfix">
+        基本信息
+        <span ng-click="vm.modify()" title="修改基本信息" class="glyphicon glyphicon-pencil pull-right"></span>
+    </h4>
+    <div class="row content-item">
+        <div class="col-xs-1">昵称: </div>
+        <div class="col-xs-2">{{user.name}}</div>
+    </div>
+    <div class="row content-item">
+        <div class="col-xs-1">手机: </div>
+        <div class="col-xs-2">{{user.tel}}</div>
+    </div>
+    <div class="row content-item">
+        <div class="col-xs-1">QQ: </div>
+        <div class="col-xs-2">{{user.qq}}</div>
+    </div>
+</div>

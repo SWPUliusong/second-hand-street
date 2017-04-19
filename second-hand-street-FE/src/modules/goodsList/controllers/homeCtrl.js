@@ -16,6 +16,7 @@ export default [
                 $scope.$apply(function () {
                     [{ data: vm.recentGoods }, { data: vm.collectedMostGoods }, { data: vm.pvMostGoods }] = res_arr
                 })
+                util.scrollTo(0)
             })
             .catch(function (err) {
                 console.log(err.data.message)

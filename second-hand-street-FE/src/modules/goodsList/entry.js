@@ -2,7 +2,7 @@ import homeCtrl from './controllers/homeCtrl'
 import showByTypeCtrl from './controllers/showByType'
 
 angular
-    .module('app.goodsList', [])
+    .module('app.goods.list', [])
     .config([
         '$stateProvider',
         function ($stateProvider) {
@@ -21,10 +21,6 @@ angular
                     url: '?type&subtype',
                     templateUrl: './templates/goodsList/showByType.html',
                     controller: showByTypeCtrl
-                })
-                .state('goods.details', {
-                    url: '/:id',
-                    template: '123789569477569484'
                 })
         }
     ])

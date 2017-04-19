@@ -1,0 +1,43 @@
+<div class="page-content container">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="user-big-avatar bg-white clearfix">
+            <div class="profile-avatar bg-pale pull-left">
+                <img ng-src="{{vm.user.avatar}}" alt="{{vm.user.name}}">
+            </div>
+            <div class="pull-left user-profile">
+                <h3 ng-bind="vm.user.name"></h3>
+                <time class="text-green">创建于: {{vm.user.createAt | date: 'yyyy-MM-dd HH:mm:ss'}}</time>
+            </div>
+        </div>
+        <div class="bg-white padding-15">
+            <div class="changeStatus">
+                <span ng-click="(params.page=1) && (params.status = [1, 0][params.status])">
+                    <button class="btn pedding" ng-class="{active: params.status==0}">正在出售</button>
+                    <button class="btn resolve" ng-class="{active: params.status==1}">已经售出</button>
+                </span>
+            </div>
+            <div ng-if="vm.goods && vm.goods.length > 0">
+                <div class="area">
+                    <div class="area-header text-center">
+                        <h3 class="page-title-wrap">
+                            <span ng-class="{'list-header': params.status==1}" class="page-title-content">
+                                {{params.status==0?'正在出售':'已经售出'}}
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div ui-sref="goods.details({id: {{item._id}}})" 
+                        class="col-xs-3" 
+                        ng-repeat="item in vm.goods">
+                            <img-reset img-data="item"></img-reset>
+                        </div>
+                    </div>
+                </div>
+                <pagination></pagination>
+            </div>
+            <div ng-if="!vm.goods || vm.goods.length < 1" class="text-center padding-15">
+                {{params.status==0?'暂时没有正在出售的商品':'暂时没有商品售出'}}
+            </div>
+        </div>
+    </div>
+</div>

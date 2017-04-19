@@ -1,0 +1,137 @@
+.user-big-avatar {
+    @w: 120px;
+    @dis: 20px;
+    position: relative;
+    margin-top: 60px;
+    .profile-avatar {
+        padding: @dis;
+    }
+    .avatar:hover .avatar-wrap {
+        display: block;
+    }
+    .avatar, img, .avatar-wrap {
+        width: @w;
+        height: @w;
+        border-radius: 50%;
+
+    }
+    .avatar-wrap {
+        display: none;
+        position: absolute;
+        top: @dis;
+        left: @dis;
+        background-color: fade(@black, 40%);
+        line-height: @w;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .user-profile {
+        padding: 20px;
+        h3 {
+            margin-bottom: 15px;
+        }
+        p {
+            margin-top: 15px;
+        }
+        button.btn:focus {
+            color: @white;
+        }
+    }
+}
+.profile-nav {
+    width: 100%;
+    display: table;
+    padding-top: 5px;
+    background-color: @green;
+    li {
+        display: table-cell;
+        background-color: @white;
+        &:hover a, &.active a{
+            text-decoration: none;
+            background-color: @green;
+            color: @white;
+        }
+    }
+    a {
+        display: block;
+        text-align: center;
+        font-size: 16px;
+        padding: 15px 30px 20px;
+    }
+}
+.owner-content {
+    padding: 40px;
+}
+.content-title {
+    color: @green;
+    padding: 10px 0;
+    width: 50%;
+    border-bottom: 1px solid @green;
+    margin: 20px 0;
+    &:first-child {
+        margin-top: 0;
+    }
+    span {
+        cursor: pointer;
+    }
+}
+.content-item {
+    margin: 10px 0;
+}
+.modify-btn {
+    padding: 8px 82px;
+    margin-left: 16px;
+    margin-top: 29px;
+}
+.modify h3 {
+    margin-bottom: 30px;
+}
+
+.changeStatus {
+    
+    button {
+        position: relative;
+        z-index: 1;
+        color: @white !important;
+        border-radius: 17px;
+        &.resolve {
+            left: -24px;
+        }
+        &.active {
+            background-color: @green;
+            z-index: 10;
+        }
+    } 
+}
+.sold-out {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    background-color: fade(@green, 60%);
+    padding: 8px;
+}
+.opt-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 15px;
+    span {
+        display: inline-block;
+        padding: 10px;
+        background-color: fade(@white, 60%);
+    }
+}
+.area>.row>.col-xs-3:hover .opt-btn {
+    display: flex;
+}
+.list-header {
+    background: @gray;
+}
+.msg-btn {
+    padding: 0px 5px;
+    margin-left: 30px;
+    color: @white !important;
+}

@@ -1,0 +1,14 @@
+<div class="dropdown-reset clearfix" uib-dropdown>
+    <div uib-dropdown-toggle></div>
+    <i class="glyphicon glyphicon-triangle-bottom"></i>
+    <i class="glyphicon glyphicon-triangle-top"></i>
+    <div class="val" ng-bind="vm.ngModel[key]||vm.ngModel.name"></div>
+    <div uib-dropdown-menu>
+        <ul>
+            <li ng-repeat='item in vm.list track by $index'
+                ng-click='vm.check(item);'
+                ng-bind="item[key]||item.name">
+            </li>
+        </ul>
+    </div>
+</div>

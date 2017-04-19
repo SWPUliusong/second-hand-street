@@ -1,0 +1,86 @@
+<form class="form-horizontal bg-green publish text-white" ng-submit="vm.submit()">
+    <div class="form-group img-list">
+        <div class="col-xs-3" ng-repeat="item in params.images track by $index">
+            <span title="删除图片" class="sold-out" ng-click="params.images.splice($index, 1)">
+                <i class="text-red glyphicon glyphicon-trash"></i>
+            </span>
+            <img ng-src="{{item}}" class="img img-responsive">
+        </div>
+        <div ng-if="params.images.length < 4" ng-class="params.images.length < 1 ? 'text-center' : 'col-xs-3'">
+            <img src="./images/add-guly.png" alt="上传" class="img img-responsive"
+            ngf-select ngf-change="upload($file)"
+            ngf-accept="'image/png,image/jpeg,image/gif,image/jpg'" 
+            ngf-pattern="'image/png,image/jpeg,image/gif,image/jpg'">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3 font-normal text-right">商品名称</label>
+        <div class="col-xs-7">
+            <input maxlength="25" class="form-control" 
+            type="text" ng-model="params.title" 
+            placeholder="最大长度为25">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3 font-normal text-right">商品详情</label>
+        <div class="col-xs-7">
+            <textarea rows="3" class="form-control" ng-model="params.details"
+            placeholder="建议填写物品用途,新旧程度,原价等信息,至少15字"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3 font-normal text-right">交易地点</label>
+        <div class="col-xs-7">
+            <input class="form-control" type="text" ng-model="params.place"
+            placeholder="宿舍,教学楼,食堂等">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3 font-normal text-right">价格</label>
+        <div class="col-xs-7">
+            <input class="form-control" type="number" ng-model="params.price"
+            placeholder="¥">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3 font-normal text-right">分类</label>
+        <div class="col-xs-7">
+            <div class="row">
+                <div class="col-xs-6">
+                    <uib-dropdown-reset list="vm.type" 
+                    ng-model="vm.typeItem" 
+                    change="params.type=item.value"></uib-dropdown-reset>
+                </div>
+                <div class="col-xs-6" ng-if="vm.typeItem.subMenu">
+                    <uib-dropdown-reset list="vm.typeItem.subMenu"
+                    ng-model="vm.subtype"
+                    change="params.subtype=item.value"></uib-dropdown-reset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4 font-normal text-right">联系方式(至少选填一样)</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3 font-normal text-right">手机</label>
+        <div class="col-xs-7">
+            <input class="form-control" ng-keyup="vm.change()" type="text"
+            ng-model="vm.params.tel" placeholder="手机">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3 font-normal text-right">QQ</label>
+        <div class="col-xs-7">
+            <input class="form-control" ng-keyup="vm.change()" type="text"
+            ng-model="vm.params.qq" placeholder="QQ">
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" 
+        ng-disabled="params.images.length < 1 || !params.title || !params.details 
+        || !params.place || !params.price || !(vm.params.tel || vm.params.qq)
+        || !params.type || (vm.typeItem.subMenu && !params.subtype)" 
+        class="login-btn btn bg-greenlight">{{state=='edit'?'修改商品':'发布商品'}}</button>
+    </div>
+</form>

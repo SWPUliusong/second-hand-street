@@ -39,6 +39,7 @@ export default [
                 params.sort = sort
                 params.reduce = -1
             }
+            params.page = 1
         }
 
         // 加载数据

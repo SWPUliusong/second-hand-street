@@ -4,7 +4,7 @@ address, cite, dfn, em, var { font-style:normal; }
 code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
 small{ font-size:12px; }
 ul{ list-style:none; }
-a, *[href] { text-decoration:none; cursor: pointer;}
+a, *[href] { text-decoration:none; cursor: pointer; color: #333;}
 a:hover { text-decoration:underline; }
 sup { vertical-align:text-top; }
 sub{ vertical-align:text-bottom; }
@@ -30,6 +30,8 @@ table { border-collapse:collapse; border-spacing:0; }
 @white: #ffffff;
 @yellow: #fdfd90;
 @black: #3F495B;
+@pale: #f6f9f9;
+@gray: #cacaca;
 
 .border(bottom, @rest...) {
   border-bottom: @rest;
@@ -73,6 +75,15 @@ table { border-collapse:collapse; border-spacing:0; }
 .bg-orangelight {
   .bg(@orangelight);
 }
+.bg-red {
+  .bg(@red);
+}
+.bg-pale {
+  .bg(@pale);
+}
+.bg-gray {
+  .bg(@gray);
+}
 
 .text-green {
   .text(@green);
@@ -95,6 +106,9 @@ table { border-collapse:collapse; border-spacing:0; }
 .text-white {
   .text(@white);
 }
+.text-gray {
+  .text(@gray);
+}
 
 .font-bold {
   font-weight: bold;
@@ -105,12 +119,32 @@ table { border-collapse:collapse; border-spacing:0; }
 .font-bigger {
   font-size: 1.2em;
 }
+.font-big {
+  font-size: 24px;
+}
 
 .cursor-pointer {
   cursor: pointer;
   padding: 15px;
 }
 
+.padding-15 {
+  padding: 15px;
+}
+.padding-10 {
+  padding: 10px;
+}
+.padding-top-10 {
+  padding-top: 10px;
+}
+.padding-5 {
+  padding: 5px;
+}
+
 .border-bottom {
   .border(bottom, 1px, solid, @green)
+}
+
+.link:hover {
+  color: @green;
 }

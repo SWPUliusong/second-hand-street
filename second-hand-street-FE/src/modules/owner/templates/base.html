@@ -1,0 +1,35 @@
+<div class="page-content container">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="user-big-avatar bg-white clearfix">
+            <div class="profile-avatar bg-pale pull-left">
+                <div class="avatar">
+                    <img ng-src="{{user.avatar}}" alt="{{user.name}}">
+                    <div class="avatar-wrap text-center text-white" ngf-select
+                    ngf-change="upload($file)"
+                    ngf-accept="'image/png,image/jpeg,image/gif,image/jpg'" 
+                    ngf-pattern="'image/png,image/jpeg,image/gif,image/jpg'">更换头像</div>
+                </div>
+            </div>
+            <div class="pull-left user-profile">
+                <h3 ng-bind="user.name"></h3>
+                <time class="text-green">创建于: {{user.createAt | date: 'yyyy-MM-dd HH:mm:ss'}}</time>
+                <p><button  ng-click="modifyPassword()" class="text-white btn bg-greenlight">修改密码</button></p>
+            </div>
+        </div>
+        <ul class="area profile-nav" scroll-to>
+            <li ui-sref-active="active">
+                <a ui-sref="owner.profile">个人资料</a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="owner.goods">我发布的商品</a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="owner.collection">我的收藏</a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="owner.message">消息中心</a>
+            </li>
+        </ul>
+        <ui-view></ui-view>
+    </div>
+</div>

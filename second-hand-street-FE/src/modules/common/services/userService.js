@@ -1,82 +1,68 @@
 export default [
+    'store',
     '$http',
     '$rootScope',
-    function ($http, $rootScope) {
+    function (store, $http, $rootScope) {
         // 注册
         this.register = function (data) {
-            return $http({
-                url: '/users',
-                method: 'POST_HAL',
-                data
-            }).then(res => $rootScope.user = res.data)
+            return $http
+                .post('/users', data)
+                .then(res => $rootScope.user = res.data)
         }
 
         // 登录
         this.signin = function (data) {
-            return $http({
-                url: '/signin',
-                method: 'POST_HAL',
-                data
-            }).then(res => $rootScope.user = res.data)
+            return $http
+                .post('/signin', data)
+                .then(res => $rootScope.user = res.data)
         }
 
         // 注销
         this.signout = function () {
-            return $http({
-                url: '/users',
-                method: 'DELETE_HAL'
-            }).then(res => delete $rootScope.user)
+            return $http
+                .delete('/users')
+                .then(res => delete $rootScope.user)
         }
 
         // 获取用户数据
         this.findById = function (id) {
-            return $http({
-                url: `/users/${id}`,
-                method: 'GET_HAL'
-            })
+            return $http.get(`/users/${id}`)
         }
 
         // 修改用户信息
         this.update = function (data) {
-            return $http({
-                url: `/users/${data.id}`,
-                method: 'PUT_HAL',
-                data
-            }).then(res => $rootScope.user = res.data)
+            return $http
+                .put('/users', data)
+                .then(res => $rootScope.user = res.data)
         }
 
         // 修改密码
         this.updatePassword = function (data) {
-            return $http({
-                url: `/users/${data.id}/password`,
-                method: 'PUT_HAL',
-                data
-            })
+            return $http
+                .put('/password', data)
+                .then(res => {
+                    let loginInfo = store.get('loginInfo')
+                    if (!!loginInfo) {
+                        loginInfo.password = data.new_password
+                        store.set('loginInfo', loginInfo)
+                    }
+                    return res
+                })
         }
 
         // 收藏商品
-        this.collect = function (data) {
-            return $http({
-                url: '/collections',
-                method: 'POST_HAL',
-                data
-            })
+        this.collect = function (id) {
+            return $http.post(`/collections/${id}`)
         }
 
         // 取消收藏
         this.cancelCollect = function (id) {
-            return $http({
-                url: `/collections/${id}`,
-                method: 'DELETE_HAL'
-            })
+            return $http.delete(`/collections/${id}`)
         }
 
         // 获取收藏列表
-        this.findCollections = function () {
-            return $http({
-                url: '/collections',
-                method: 'GET_HAL'
-            })
+        this.findCollections = function (params) {
+            return $http.get('/collections', { params })
         }
 
     }

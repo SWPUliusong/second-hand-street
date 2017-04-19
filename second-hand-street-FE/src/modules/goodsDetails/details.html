@@ -1,0 +1,133 @@
+<div class="page-content container goods-details" ng-init="vm.showing=vm.goods.images[0]">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="area bg-white">
+            <div class="row">
+                <div class="img-box col-xs-6">
+                    <div class="img-show">
+                        <img ng-src="{{vm.activeImg.value}}" alt="{{vm.goods.title}}">
+                    </div>
+                    <div class="goods-collect text-center" 
+                    ng-click="vm.collect()"
+                    title="{{vm.isCollect?'取消收藏':'收藏商品'}}">
+                        <span class="glyphicon"
+                        ng-class="vm.isCollect?'glyphicon-star':'glyphicon-star-empty'"></span>
+                        <p>{{vm.goods.num}}</p>
+                    </div>
+                    <div class="img-all">
+                        <div class="img-item"
+                        ng-class="{active: vm.activeImg.index == $index}"
+                        ng-mouseover="(vm.activeImg.value=item)&&(vm.activeImg.index=$index)"
+                        ng-repeat="item in vm.goods.images track by $index">
+                            <img class="img-responsive" ng-src="{{item}}" alt="{{vm.goods.title}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 details-list">
+                    <h3 class="text-green">{{vm.goods.title}}</h3>
+                    <h2 class="text-red">
+                        {{vm.goods.price | currency: '¥'}}
+                        &nbsp; <small class="text-init">浏览了{{vm.goods.pv}}次</small>
+                    </h2>
+                    <ul class="lead">
+                        <li class="row">
+                            <div class="col-xs-3 text-white text-right">
+                                <span class="bg-green padding-5">交易地点</span>
+                            </div>
+                            <div class="col-xs-9 text-left">{{vm.goods.place}}</div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-3 text-white text-right">
+                                <span class="bg-green padding-5">卖家</span>
+                            </div>
+                            <div class="col-xs-9 text-left">
+                                <span class="link" ui-sref="user({id: {{vm.goods.owner._id}}})">
+                                    {{vm.goods.owner.name}}
+                                </span>
+                            </div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-3 text-white text-right">
+                                <span class="bg-green padding-5">手机</span>
+                            </div>
+                            <div class="col-xs-9 text-left">{{vm.goods.owner.tel}}</div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-3 text-white text-right">
+                                <span class="bg-green padding-5">QQ</span>
+                            </div>
+                            <div class="col-xs-9 text-left">{{vm.goods.owner.qq}}</div>
+                        </li>
+                        <li class="row">
+                            <div class="col-xs-3 text-white text-right">
+                                <span class="bg-green padding-5">发布时间</span>
+                            </div>
+                            <div class="col-xs-9 text-left">
+                                {{vm.goods.publishTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+                            </div>
+                        </li>
+                    </ul>
+                    <h1 ng-if="vm.goods.status" class="text-gray text-center">已售出</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-big-avatar bg-white">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div class="profile-avatar">
+                        <img title="{{vm.goods.owner.name}}" 
+                        ui-sref="user({id: {{vm.goods.owner._id}}})"
+                        ng-src="{{vm.goods.owner.avatar}}">
+                    </div>
+                </div>
+                <div class="col-xs-10">
+                    <p class="lead padding-15">{{vm.goods.details}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white padding-15 message">
+            <button ng-click="vm.changeInput('default')" class="btn btn-info">发表评论</button>
+            <div class="reply-input" ng-class="{active: vm.activeInput==='default'}">
+                <div class="input-group">
+                    <textarea ng-model="msgParams.content" rows="3" class="form-control"></textarea>
+                    <div ng-disabled="!msgParams.content" 
+                    ng-click="vm.reply()"
+                    class="input-group-addon">发表</div>
+                </div>
+            </div>         
+            <div ng-if="vm.message && vm.message.length > 0">
+                <ul class="list-group">
+                    <li ng-repeat="item in vm.message track by $index" class="list-group-item">
+                        <div class="clearfix">
+                            <span ui-sref="user({id: {{item.from._id}}})" class="h4 text-green">
+                                {{item.from.name}}
+                            </span>&nbsp;
+                            <i class="text-orange glyphicon glyphicon-share-alt"></i>&nbsp;
+                            <span ui-sref="user({id: {{item.to._id}}})" class="h4 text-green">
+                                {{item.to.name}}
+                            </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <time>{{item.publishTime | date: 'yyyy-MM-dd HH:mm:ss'}}</time>
+                            <a ng-click="vm.changeInput($index)" class="pull-right text-green">回复</a>
+                        </div>
+                        <p class="padding-top-10">{{item.content}}</p>
+                        <div class="reply-input" ng-class="{active: vm.activeInput===$index}">
+                            <div class="input-group">
+                                <textarea rows="3" class="form-control"
+                                ng-model="msgParams.content"
+                                placeholder="{{'回复 ' + item.from.name + ' :'}}"></textarea>
+                                <div ng-disabled="!msgParams.content" 
+                                ng-click="vm.reply(item.from._id)"
+                                class="input-group-addon">发表</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <pagination></pagination>
+            </div>
+            <div ng-if="!vm.message || vm.message.length < 1" class="text-center padding-15">
+                暂时没有评论
+            </div>
+        </div>
+    </div>
+</div>

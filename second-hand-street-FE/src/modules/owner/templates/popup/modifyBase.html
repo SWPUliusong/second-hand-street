@@ -1,0 +1,24 @@
+<form class="form-horizontal bg-green login modify text-white" ng-submit="submit()">
+    <h3 class="text-center text-yellow">修改基本信息</h3>
+    <div class="form-group">
+        <label class="control-label col-xs-4 font-normal text-right">昵称</label>
+        <div class="col-xs-6">
+            <input ng-keyup="change()" class="form-control" type="text" ng-model="params.name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4 font-normal text-right">手机</label>
+        <div class="col-xs-6">
+            <input ng-keyup="change()" class="form-control" type="text" ng-model="params.tel">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4 font-normal text-right">QQ</label>
+        <div class="col-xs-6">
+            <input ng-keyup="change()" class="form-control" type="text" ng-model="params.qq">
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" ng-disabled="!isModify" class="login-btn modify-btn btn bg-greenlight">确认修改</button>
+    </div>
+</form>

@@ -1,6 +1,6 @@
 module.exports = [
     function () {
-        this.scrollTo = function (position, ms = 300) {
+        this.scrollTo = function (position = 0, ms = 0) {
             if (ms === 0) {
                 document.body.scrollTop = 0;
                 return
@@ -11,7 +11,7 @@ module.exports = [
             let top = document.body.scrollTop;
 
             // 移动距离
-            let step = top / ms * dur
+            let step = Math.abs(top - position) / ms * dur
 
             move();
 

@@ -6,7 +6,10 @@ import 'Upload'
 import 'UploadShim'
 import './common/entry'
 import './goodsList/entry'
+import './goodsDetails/entry'
 import './reading'
+import './owner/entry'
+import './user/entry'
 
 angular
     .module('app', [
@@ -14,8 +17,11 @@ angular
         'ui.bootstrap',
         'ngFileUpload',
         'app.common',
-        'app.goodsList',
-        'app.reading'
+        'app.goods.list',
+        'app.goods.details',
+        'app.reading',
+        'app.owner',
+        'app.user',
     ])
     .constant('httpConfig', {
         NAME: 'second-hand-street',
@@ -45,18 +51,29 @@ angular
     ])
     .run([
         'util',
+        '$state',
         '$rootScope',
         'validService',
         'UibModalReset',
-        function (util, $rootScope, validService, UibModalReset) {
-            validService.user();
+        function (util, $state, $rootScope, validService, UibModalReset) {
+            validService.userSync()
 
             $rootScope.$on("$stateChangeStart", function (event, toState) {
+                if (/^owner/.test(toState.name) && !$rootScope.user) {
+                    event.preventDefault();
+                    return
+                }
+
                 _.forEach(UibModalReset.current, function (modal) {
                     modal.dismiss();
                 });
-                util.scrollTo(0, 0)
             });
+
+            $rootScope.$watch('user', newVal => {
+                if (!newVal && $state.includes('owner')) {
+                    $state.go('goods.home')
+                }
+            })
         }
     ])
     .directive('navbar', require('./navbar'))
