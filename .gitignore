@@ -8,7 +8,8 @@
 
 # node modules
 node_modules
-npm-debug.log
+debug.log
+node-debug.log
 
 # cache files
 temp
