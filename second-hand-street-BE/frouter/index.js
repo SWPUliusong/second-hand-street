@@ -2,9 +2,11 @@ const path = require("path")
 const formatPath = require("./formatPath")
 const ls = require("./ls")
 const config = require("./config")
-const router = require("koa-router")()
+const Router = require("koa-router")
 
-function frouter(app, opt) {
+let router = new Router()
+
+function frouter(app, opt, callback) {
 
     if (!opt) {
         throw new Error('root config required.');
@@ -22,8 +24,15 @@ function frouter(app, opt) {
     let root = opt.root;
 
     ls(root).forEach(function (filepath) {
-        let exportFuncs = require(filepath);
+        let modulePath = path.resolve(process.cwd(), filepath)
+        let exportFuncs = require(modulePath);
+        
+        root = root.replace(/^(\.\/)?/, '')
         let pathRegexp = formatPath(filepath, root, opt);
+
+        if (callback) {
+            pathRegexp = callback(pathRegexp) || pathRegexp
+        }
 
         for (let method in exportFuncs) {
 
@@ -51,8 +60,8 @@ function frouter(app, opt) {
         .use(router.routes())
         .use(router.allowedMethods());
 
-    return function* (next) {
-        yield next
+    return async (cxt, next) => {
+        await next()
     }
 
 }

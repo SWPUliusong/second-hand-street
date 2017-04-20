@@ -1,5 +1,5 @@
 module.exports = {
-    port: 3000,
+    port: 4000,
     dbUrl: 'mongodb://localhost:27017/second-hand-street',
-    secret: 'second-hand-street'
+    key: 'second-hand-street'
 }

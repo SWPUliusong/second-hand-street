@@ -4,27 +4,27 @@ let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
 
 let User = new Schema({
-    name: { 
-        type: String, 
-        required: true 
+    name: {
+        type: String,
+        default: '未命名'
     },
     password: { 
-        type: String, 
-        required: true 
+        type: String,
+        required: true
     },
     eamil: { 
-        type: String, 
+        type: String,
         required: true,
-        index: true,
-        match: /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/ 
+        index: true
     },
-    tel: { 
-        type: String, 
-        match: /^1\d{10}$/ 
-    },
+    tel: String,
+    qq: String,
     collectors: [ObjectId],
-    avatar: String,
-    create_at: {
+    avatar: {
+        type: String,
+        default: 'http://ol5140dkq.bkt.clouddn.com/FoHvYP7zIUIxtwJiT7fATMst3kv4'
+    },
+    createAt: {
         type: Date,
         default: Date.now
     }

@@ -1,44 +1,39 @@
-const express = require("express")
-const http = require("http")
-const logger = require("morgan")
-const bodyParser = require("body-parser")
-const cookieParser = require("cookie-parser")
-const frouter = require("frouter")
-const session = require("express-session")
-const MongoStore = require("connect-mongo")(session)
+const koa = require("koa")
+const bodyparser = require("koa-bodyparser")
+const logger = require("koa-logger")
+const session = require("koa-session")
+const frouter = require("./frouter")
 
-let app = express()
+let app = new koa()
 let config = require("./config")
 
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser());
+if (app.env === 'development') {
+    app.use(logger())
+}
+
+app.use(async (cxt, next) => {
+    try {
+        await next()
+    } catch (e) {
+        cxt.status = e.status
+        cxt.body = e
+    }
+})
+
 app.use(session({
-    store: new MongoStore({
-        url: config.dbUrl
-    }),
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24
-    },
-    secret: config.secret,
-    resave: false,
-    saveUninitialized: true
-}))
+    key: config.key
+}, app))
+
+app.use(bodyparser())
+
 app.use(frouter(app, {
     root: './routes',
     "_": true
-}))
-app.use(function(req, res, next) {
-    let err = new Error('not found')
-    err.status = 404
-    next(err)
-})
-app.use(function(err, req, res, next) {
-    let error = err || {}
-    res.status(error.status || 500).json(error)
+}, uri => '/api' + uri))
+
+app.use(cxt => {
+    let error = {status: 404}
+    throw error
 })
 
-http.createServer(app)
-    .on('error', err => console.log(err))
-    .listen(config.port, () => console.log('listening on ' + config.port))
+app.listen(config.port, () => console.log('listening on http://localhost:' + config.port))

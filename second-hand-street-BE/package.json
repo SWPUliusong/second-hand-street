@@ -4,7 +4,9 @@
   "description": "校内交易平台后端",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node app.js",
+    "start": "set NODE_ENV=production && pm2 start app.js --name second-hand-street",
+    "stop": "pm2 stop second-hand-street"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,18 @@
   "bugs": {
     "url": "https://github.com/SWPUliusong/second-hand-street-BE/issues"
   },
-  "homepage": "https://github.com/SWPUliusong/second-hand-street-BE#readme"
+  "homepage": "https://github.com/SWPUliusong/second-hand-street-BE#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-router": "^7.1.1",
+    "koa-session": "^5.0.0",
+    "mongoose": "^4.9.5"
+  },
+  "devDependencies": {
+    "koa-logger": "^2.0.1",
+    "pm2": "^2.4.5"
+  }
 }

@@ -1,8 +1,7 @@
-exports.checkNotLogin = function(req, res, next) {
-	if (req.session._user) next()
-	else {
-        let err = new Error('当前未登录')
-        err.status = 401
-        next(err)
+exports.checkNotLogin = async (cxt, next) => {
+    if (cxt.session._user) await next()
+    else {
+        let err = {status: 401, code: 10004}
+        throw err
     }
 }

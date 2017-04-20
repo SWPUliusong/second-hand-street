@@ -8,7 +8,7 @@ function formatPath(filePath, root, options) {
 		.replace(new RegExp("\\" + options["?"], 'g'), "?")
 		.replace(new RegExp('_', 'g'), options['_'])
 		.replace(/.js$/g, '')
-		.replace(/\/index$/g, "/")
+		.replace(/\/index$/g, "")
 }
 
 module.exports = formatPath
