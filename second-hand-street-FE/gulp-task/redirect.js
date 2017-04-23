@@ -40,7 +40,7 @@ module.exports = {
     proxy() {
         return [
             proxy('/api', {
-                target: 'localhost:6000',
+                target: 'http://localhost:4000',
                 changeOrigin: true,
                 logLevel: 'debug'
             })
