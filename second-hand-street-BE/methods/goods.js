@@ -41,14 +41,14 @@ module.exports = {
             .select('_id title')
             .exec()
     },
-    find(opts) {
+    find(opts, key_arr = ['type', 'subtype']) {
         opts.page = parseInt(opts.page) || 1
         opts.sort = opts.sort || 'publishTime'
         opts.reduce = parseInt(opts.reduce) || -1
         opts.limit = parseInt(opts.limit) || 16
 
         return Goods
-            .find(_.pick(opts, ['type', 'subtype']))
+            .find(_.pick(opts, key_arr))
             .skip((opts.page - 1) * opts.limit)
             .sort({ [opts.sort]: opts.reduce })
             .limit(opts.limit)
