@@ -1,10 +1,13 @@
-const koa = require("koa")
+global.Promise = require("bluebird")
+global._ = require("lodash")
+
+const Koa = require("koa")
 const bodyparser = require("koa-bodyparser")
 const logger = require("koa-logger")
 const session = require("koa-session")
 const frouter = require("./frouter")
 
-let app = new koa()
+let app = new Koa()
 let config = require("./config")
 
 if (app.env === 'development') {
@@ -15,13 +18,17 @@ app.use(async (cxt, next) => {
     try {
         await next()
     } catch (e) {
-        cxt.status = e.status
-        cxt.body = e
+        if (!e.status) console.error(e)
+
+        cxt.status = e.status || 500
+        let code = e.code || 50000
+        cxt.body = {code}
     }
 })
 
+app.keys = [config.key]
 app.use(session({
-    key: config.key
+    key: 'current-user'
 }, app))
 
 app.use(bodyparser())
@@ -32,7 +39,7 @@ app.use(frouter(app, {
 }, uri => '/api' + uri))
 
 app.use(cxt => {
-    let error = {status: 404}
+    let error = { status: 404, code: 40004 }
     throw error
 })
 

@@ -12,7 +12,7 @@ let User = new Schema({
         type: String,
         required: true
     },
-    eamil: { 
+    email: { 
         type: String,
         required: true,
         index: true
