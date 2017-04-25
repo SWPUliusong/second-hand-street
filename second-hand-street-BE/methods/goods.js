@@ -103,5 +103,24 @@ module.exports = {
         return Goods
             .findByIdAndUpdate(id, { $set: { status: 1 } })
             .exec()
-    }
+    },
+    incNum(id) {
+        return Goods
+            .update({ _id: id }, { $inc: { num: 1 } }, { multi: false })
+            .exec()
+    },
+    reduceNum(id) {
+        return Goods
+            .update({ _id: id }, { $inc: { num: -1 } }, { multi: false })
+            .exec()
+    },
+    isOwner(opts) {
+        return Goods
+            .findOne(opts)
+            .exec()
+            .then(data => {
+                if (data) return true
+                return false
+            })
+    },
 }

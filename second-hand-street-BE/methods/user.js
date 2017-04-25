@@ -32,6 +32,13 @@ module.exports = {
             .exec()
             .then(data => data && data.toObject())
     },
+    getUser(id) {
+        return User
+            .findById(id)
+            .select('_id name')
+            .exec()
+            .then(data => data && data.toObject())
+    },
     getOwnerById(id) {
         return User
             .findById(id)
@@ -41,14 +48,14 @@ module.exports = {
     },
     modifyBaseInfo(id, data) {
         return User
-            .update({ _id: id }, data, { multi: false })
+            .update({ _id: id }, {$set: data}, { multi: false })
             .exec()
     },
     modifyPassword(id, password, salt) {
         password = common.md5(password, salt)
 
         return User
-            .update({ _id: id }, { password: password }, { multi: false })
+            .update({ _id: id }, { $set: {password} }, { multi: false })
             .exec()
             .then(() => password)
     },

@@ -26,7 +26,7 @@ function frouter(app, opt, callback) {
     ls(root).forEach(function (filepath) {
         let modulePath = path.resolve(process.cwd(), filepath)
         let exportFuncs = require(modulePath);
-        
+
         root = root.replace(/^(\.\/)?/, '')
         let pathRegexp = formatPath(filepath, root, opt);
 
@@ -43,15 +43,19 @@ function frouter(app, opt, callback) {
 
             router[method].apply(router, exportFuncs[method])
             if (opt.debug) {
-                console.log(
-                    '%s%s%s -> %s%s%s',
-                    '\x1B[32m\x1B[1m',
-                    pathRegexp,
-                    '\x1B[22m\x1B[39m',
-                    '\x1B[36m',
-                    method.toUpperCase(),
-                    '\x1B[39m'
-                )
+                if (process.env.NODE_ENV === 'development') {
+                    console.log(
+                        '%s%s%s -> %s%s%s',
+                        '\x1B[32m\x1B[1m',
+                        pathRegexp,
+                        '\x1B[22m\x1B[39m',
+                        '\x1B[36m',
+                        method.toUpperCase(),
+                        '\x1B[39m'
+                    )
+                } else {
+                    console.log('%s -> %s', pathRegexp, method.toUpperCase())
+                }
             }
         };
     });

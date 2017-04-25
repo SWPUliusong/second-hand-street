@@ -2,7 +2,7 @@ let validator = require(process.cwd() + '/validator')
 let User = require(process.cwd() + '/methods').User
 
 exports.put = [
-    validator.isAuth('params.id'),
+    validator.isLogin(),
     validator.password(),
     async cxt => {
         let user = cxt.session.user

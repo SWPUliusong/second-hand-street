@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node app.js",
-    "start": "set NODE_ENV=production && pm2 start app.js --name second-hand-street",
+    "start": "set NODE_ENV=production && pm2 start app.js --name second-hand-street --log debug.log",
     "stop": "pm2 stop second-hand-street"
   },
   "repository": {

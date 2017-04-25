@@ -28,3 +28,18 @@ exports.delete = cxt => {
         throw {status: 401, code: 10004}
     }
 }
+
+exports.put = [
+    validator.isLogin(),
+    async cxt => {
+        let user = cxt.session.user
+        let body = _.pick(cxt.request.body, ['avatar', 'name', 'tel', 'qq'])
+
+        await User.modifyBaseInfo(user._id, body)
+
+        _.assign(user, body)
+
+        cxt.status = 200
+        cxt.body = _.omit(user, 'password')
+    }
+]

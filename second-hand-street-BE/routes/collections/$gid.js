@@ -7,6 +7,7 @@ exports.post  = [
     async cxt => {
         let uid = cxt.session.user._id
         let gid = cxt.params.gid
+        let collectors = cxt.session.user.collectors
 
         let flag = await Goods.isExist(gid)
 
@@ -14,18 +15,28 @@ exports.post  = [
 
         User.collect(uid, gid)
 
-        cxt.session.user.collectors.push(gid)
+        if (collectors.indexOf(gid) === -1) {
+            Goods.incNum(gid)
+            collectors.push(gid)
+        }
+
         cxt.status = 200
     }
 ]
 
 exports.delete = [
     validator.isLogin(),
-    async cxt => {
+    cxt => {
         let uid = cxt.session.user._id
         let gid = cxt.params.gid
+        let collectors = cxt.session.user.collectors
 
-        await User.cancelCollect(uid, gid)
+        User.cancelCollect(uid, gid)
+
+        if (collectors.indexOf(gid) > -1) {
+            Goods.reduceNum(gid)
+            _.pull(collectors, gid)
+        }
 
         cxt.status = 204
     }

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-let dbUrl = require("../config").dbUrl
+let dbUrl = require("../common").config.dbUrl
 mongoose.connect(dbUrl)
 
 mongoose.Promise = global.Promise

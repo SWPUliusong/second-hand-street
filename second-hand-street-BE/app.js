@@ -8,7 +8,7 @@ const session = require("koa-session")
 const frouter = require("./frouter")
 
 let app = new Koa()
-let config = require("./config")
+let config = require("./common").config
 
 if (app.env === 'development') {
     app.use(logger())
