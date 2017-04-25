@@ -10,7 +10,7 @@ exports.post = [
             throw {status: 403, code: 10001}  
         }
 
-        let user = (await User.create(body)).toObject()
+        let user = await User.create(body)
         cxt.session.user = Object.assign({}, user)
         delete user.password
 

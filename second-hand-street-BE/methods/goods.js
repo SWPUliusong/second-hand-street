@@ -4,6 +4,15 @@ module.exports = {
     create(data) {
         return Goods.create(data)
     },
+    isExist(id) {
+        return Goods
+            .findById(id)
+            .exec()
+            .then(data => {
+                if (data) return true
+                return false
+            })
+    },
     modifyById(id, data) {
         return Goods
             .findByIdAndUpdate(id, data)
@@ -55,7 +64,29 @@ module.exports = {
             .select('_id title price pv num images')
             .exec()
             .then(arr => {
-                if (!arr) return null
+                if (!arr) return []
+                let content = arr.map(val => {
+                    val = val.toObject()
+                    val.cover = val.images[0]
+                    delete val.images
+                    return val
+                })
+                return content
+            })
+    },
+    findList(conditions, opts) {
+
+        opts.page = parseInt(opts.page) || 1
+        opts.limit = parseInt(opts.limit) || 8
+
+        return Goods
+            .find(conditions)
+            .skip((opts.page - 1) * opts.limit)
+            .limit(opts.limit)
+            .select('_id title price pv num images')
+            .exec()
+            .then(arr => {
+                if (!arr) return []
                 let content = arr.map(val => {
                     val = val.toObject()
                     val.cover = val.images[0]
@@ -67,5 +98,10 @@ module.exports = {
     },
     count(opts) {
         return Goods.count(opts).exec()
+    },
+    workOff(id) {
+        return Goods
+            .findByIdAndUpdate(id, { $set: { status: 1 } })
+            .exec()
     }
 }

@@ -17,8 +17,14 @@ let User = new Schema({
         required: true,
         index: true
     },
-    tel: String,
-    qq: String,
+    tel: {
+        type: String,
+        default: ""
+    },
+    qq: {
+        type: String,
+        default: ""
+    },
     collectors: [ObjectId],
     avatar: {
         type: String,

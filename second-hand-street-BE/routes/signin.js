@@ -9,6 +9,10 @@ exports.post = [
 
         let user = await User.findByEmail(body.email)
 
+        if (!user) {
+            throw { status: 401, code: 10002 }
+        }
+
         if (user.password === common.md5(body.password, body.email)) {
             cxt.session.user = Object.assign({}, user)
 

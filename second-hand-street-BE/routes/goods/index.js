@@ -13,9 +13,9 @@ exports.get = async cxt => {
 
         cxt.body = {
             total: col[1],
-            limit: query.limit || 16,
-            page: query.page || 1,
-            data: col[0] || []
+            limit: query.limit,
+            page: query.page,
+            data: col[0]
         }
     }
     cxt.status = 200

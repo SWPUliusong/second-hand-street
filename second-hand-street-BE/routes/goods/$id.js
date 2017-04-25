@@ -3,7 +3,7 @@ let Goods = require(process.cwd() + '/methods').Goods
 let User = require(process.cwd() + '/methods').User
 
 exports.put = [
-    validator.isAdmin('request.body.uid'),
+    validator.isAuth(),
     validator.isExist(['images', 'place', 'details', 'price', 'type', 'subtype', 'uid']),
     async cxt => {
         let body = cxt.request.body
