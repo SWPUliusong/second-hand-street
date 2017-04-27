@@ -27,11 +27,11 @@ exports.post  = [
 exports.delete = [
     validator.isLogin(),
     cxt => {
-        let uid = cxt.session.user._id
+        let _id = cxt.session.user._id
         let gid = cxt.params.gid
         let collectors = cxt.session.user.collectors
 
-        User.cancelCollect(uid, gid)
+        User.cancelCollect({ _id }, gid)
 
         if (collectors.indexOf(gid) > -1) {
             Goods.reduceNum(gid)

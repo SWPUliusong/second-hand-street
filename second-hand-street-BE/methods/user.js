@@ -73,9 +73,9 @@ module.exports = {
                 return false
             })
     },
-    cancelCollect(uid, gid) {
+    cancelCollect(conditions, gid) {
         return User
-            .update({ _id: uid }, { $pull: { collectors: gid } }, { multi: false })
+            .update(conditions, { $pull: { collectors: gid } }, { multi: true })
             .exec()
     },
     getCollectors(id) {

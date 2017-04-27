@@ -28,6 +28,7 @@ exports.delete = [
         }
 
         Goods.removeById(id)
+        User.cancelCollect({collectors: {$all: [id]}}, id)
 
         cxt.status = 200
     }
