@@ -15,7 +15,7 @@ module.exports = {
     },
     modifyById(id, data) {
         return Goods
-            .findByIdAndUpdate(id, data)
+            .findByIdAndUpdate(id, {$set: data})
             .select('-__v')
             .exec()
     },

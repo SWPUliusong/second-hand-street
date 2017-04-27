@@ -4,7 +4,7 @@ let User = require(process.cwd() + '/methods').User
 
 exports.put = [
     validator.isAuth(),
-    validator.isExist(['images', 'place', 'details', 'price', 'type', 'subtype', 'uid']),
+    validator.isExist(['images', 'title', 'place', 'details', 'price', 'type']),
     async cxt => {
         let body = cxt.request.body
         let id = cxt.params.id
@@ -21,7 +21,7 @@ exports.delete = [
         let user = cxt.session.user
         let id = cxt.params.id
 
-        let goods = await Goods.findOne({id: id, uid: user._id})
+        let goods = await Goods.findOne({_id: id, uid: user._id})
 
         if (!goods || !goods._id) {
             throw { status: 403, code: 10005 }
@@ -43,7 +43,6 @@ exports.get = async cxt => {
 
     let owner = await User.getOwnerById(goods.uid)
     
-    delete goods.uid
     goods.owner = owner
 
     cxt.status = 200

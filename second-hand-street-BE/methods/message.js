@@ -71,8 +71,8 @@ module.exports = {
     count(conditions) {
         return Message.count(conditions).exec()
     },
-    remove(_id) {
-        return Message.remove({ _id }).exec()
+    remove(conditions) {
+        return Message.remove(conditions).exec()
     },
     changeRead(id_arr) {
         return Message

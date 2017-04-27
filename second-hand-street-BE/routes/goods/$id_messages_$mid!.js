@@ -60,7 +60,7 @@ exports.delete = [
         } else if (!cols[1]) {
             throw { status: 403, code: 30001 }
         } else {
-            Message.remove(mid)
+            Message.remove({ _id: mid })
             cxt.status = 204
         }
 

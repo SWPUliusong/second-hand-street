@@ -23,7 +23,7 @@ exports.get = async cxt => {
 
 exports.post = [
     validator.isLogin(),
-    validator.isExist(['images', 'place', 'details', 'price', 'type', 'subtype']),
+    validator.isExist(['images', 'title', 'place', 'details', 'price', 'type']),
     async cxt => {
         let body = cxt.request.body
         body.uid = cxt.session.user._id
