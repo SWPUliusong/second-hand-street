@@ -10,10 +10,15 @@
             <ul class="list-group">
                 <li ng-repeat="item in vm.message" class="list-group-item">
                     <div class="clearfix">
-                        <span ui-sref="user({id: {{item.from._id}}})" class="h4 text-green">{{item.from.name}}</span>
+                        <span ui-sref="user({id: item.from._id})" class="h4 text-green">{{item.from.name}}</span>
                         <i class="text-orange glyphicon glyphicon-share-alt"></i>
-                        <button ui-sref="goods.details({id: {{item.gid}}})" class="btn msg-btn">前往现场</button>
-                        <time class="pull-right">{{item.publishTime | date: 'yyyy-MM-dd HH:mm:ss'}}</time>
+                        <button ui-sref="goods.details({id: item.gid})" class="btn msg-btn">前往现场</button>
+                        <div class="pull-right">
+                            <time>
+                                {{item.publishTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+                            </time>&nbsp;&nbsp;
+                            <a class="text-red" ng-click="vm.delete(item._id)">删除</a>
+                        </div>
                     </div>
                     <p>{{item.content}}</p>
                 </li>

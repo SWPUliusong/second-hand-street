@@ -1,19 +1,21 @@
 module.exports = [
+    'util',
     '$scope',
     '$timeout',
+    'errorCatch',
     'userService',
     'validService',
     'goodsDetails',
     'UibModalReset',
     'commentService',
-    function ($scope, $timeout, userService, validService, goodsDetails, UibModalReset, commentService) {
+    function (util, $scope, $timeout, errorCatch, userService, validService, goodsDetails, UibModalReset, commentService) {
+        util.scrollTo(0)
+        
         let vm = $scope.vm = {}
         let params = $scope.params = {
             page: 1
         }
-        let msgParams = $scope.msgParams = {
-            gid: goodsDetails._id
-        }
+        let msgParams = $scope.msgParams = {}
 
         $scope.page = 1;
 
@@ -67,6 +69,10 @@ module.exports = [
                     .then(res => {
                         vm.message = res.data.data
                         $scope.pageValue = _.pick(_.get(res, 'data', {}), ['total', 'page', 'limit'])
+
+                        if (vm.message.length < 1 && params.page > 1) {
+                            params.page--
+                        }
                     })
             })
         }
@@ -85,12 +91,24 @@ module.exports = [
         vm.reply = function (to) {
             if (!msgParams.content) return
             commentService
-                .publish(_.assign({}, msgParams, {to}))
+                .publish(goodsDetails._id, _.assign({}, msgParams, { to }))
                 .then(res => {
                     vm.changeInput();
                     params.page = 1;
                     loadData()
                 })
+                .catch(errorCatch.modal)
+        }
+
+        // 删除评论
+        vm.delete = cid => {
+            UibModalReset
+                .choose('是否删除此条评论')
+                .then(() => {
+                    return commentService.delete({ gid: goodsDetails._id, cid })
+                })
+                .then(loadData)
+                .catch(errorCatch.modal)
         }
     }
 ]

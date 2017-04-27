@@ -1,13 +1,13 @@
 <div class="modal-header">
     <span ng-if="needClose" class="glyphicon glyphicon-remove modal-close" ng-click="$dismiss()"></span>
-    <div class="modal-title" ng-bind-html="::title|trustHtml"></div>
+    <div class="modal-title" ng-bind-html="title|trustHtml"></div>
 </div>
 <div ng-if="!!template || !!message" class="modal-body" html-compile="(template || message) | trustHtml"></div>
 <div class="modal-footer" ng-if="::needBtn">
     <div class="col-xs-6 text-center">
-        <button type="button" class="btn btn-danger btn-{{size}}" ng-click="$dismiss()">取消</button>
+        <button type="button" class="btn btn-danger btn-md" ng-click="$dismiss()">取消</button>
     </div>
     <div class="col-xs-6 text-center">
-        <button type="button" class="btn btn-success btn-{{size}}" ng-click="$submit ? $submit() : $close()">确认</button>
+        <button type="button" class="btn btn-success btn-md" ng-click="$submit ? $submit() : $close()">确认</button>
     </div>
 </div>

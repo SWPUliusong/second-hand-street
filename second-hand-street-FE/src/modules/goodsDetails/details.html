@@ -40,7 +40,7 @@
                                 <span class="bg-green padding-5">卖家</span>
                             </div>
                             <div class="col-xs-9 text-left">
-                                <span class="link" ui-sref="user({id: {{vm.goods.owner._id}}})">
+                                <span class="link" ui-sref="user({id: vm.goods.owner._id})">
                                     {{vm.goods.owner.name}}
                                 </span>
                             </div>
@@ -76,7 +76,7 @@
                 <div class="col-xs-2">
                     <div class="profile-avatar">
                         <img title="{{vm.goods.owner.name}}" 
-                        ui-sref="user({id: {{vm.goods.owner._id}}})"
+                        ui-sref="user({id: vm.goods.owner._id})"
                         ng-src="{{vm.goods.owner.avatar}}">
                     </div>
                 </div>
@@ -100,20 +100,24 @@
                 <ul class="list-group">
                     <li ng-repeat="item in vm.message track by $index" class="list-group-item">
                         <div class="clearfix">
-                            <span ui-sref="user({id: {{item.from._id}}})" class="h4 text-green">
+                            <span ui-sref="user({id: item.from._id})" class="h4 text-green">
                                 {{item.from.name}}
                             </span>&nbsp;
                             <i class="text-orange glyphicon glyphicon-share-alt"></i>&nbsp;
-                            <span ui-sref="user({id: {{item.to._id}}})" class="h4 text-green">
+                            <span ui-sref="user({id: item.to._id})" class="h4 text-green">
                                 {{item.to.name}}
                             </span>&nbsp;&nbsp;&nbsp;&nbsp;
                             <time>{{item.publishTime | date: 'yyyy-MM-dd HH:mm:ss'}}</time>
-                            <a ng-click="vm.changeInput($index)" class="pull-right text-green">回复</a>
+                            <div class="pull-right">
+                                <a class="text-red" ng-if="user._id === vm.goods.owner._id" 
+                                ng-click="vm.delete(item._id)">删除</a>&nbsp;&nbsp;
+                                <a ng-click="vm.changeInput($index)" class="text-green">回复</a>
+                            </div>
                         </div>
                         <p class="padding-top-10">{{item.content}}</p>
                         <div class="reply-input" ng-class="{active: vm.activeInput===$index}">
                             <div class="input-group">
-                                <textarea rows="3" class="form-control"
+                                <textarea maxlength="250" rows="3" class="form-control"
                                 ng-model="msgParams.content"
                                 placeholder="{{'回复 ' + item.from.name + ' :'}}"></textarea>
                                 <div ng-disabled="!msgParams.content" 

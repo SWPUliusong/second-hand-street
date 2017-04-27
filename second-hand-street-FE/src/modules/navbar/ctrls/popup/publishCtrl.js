@@ -29,11 +29,6 @@ module.exports = [
                 .then(filename => {
                     params.images.push(filename)
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
         }
 
         vm.submit = function () {

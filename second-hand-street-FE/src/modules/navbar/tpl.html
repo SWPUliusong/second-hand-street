@@ -11,7 +11,7 @@
             <input type="text" ng-model="params.keyword" class="form-control" ng-keyup="vm.search($event)" placeholder="搜索">
             <ul class="intellisense" ng-if="vm.isShowFeedback">
                 <li ng-repeat="good in vm.goods track by $index">
-                    <a class="text-white" ng-click="params.keyword=null" ui-sref="goods.details({id: {{good._id}}})">{{good.title}}</a>
+                    <a class="text-white" ng-click="params.keyword=null" ui-sref="goods.details({id: good._id})">{{good.title}}</a>
                 </li>
             </ul>
         </div>

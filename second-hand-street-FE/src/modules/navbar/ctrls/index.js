@@ -6,10 +6,12 @@ export default [
     '$scope',
     '$http',
     '$document',
+    '$rootScope',
+    'errorCatch',
     'userService',
     'goodsService',
     'UibModalReset',
-    function ($scope, $http, $document, userService, goodsService, UibModalReset) {
+    function ($scope, $http, $document, $rootScope, errorCatch, userService, goodsService, UibModalReset) {
         let vm = $scope.vm = {
             isShowFeedback: false
         }
@@ -29,7 +31,7 @@ export default [
 
             // 实时反馈
             goodsService
-                .keyword(params.keyword)
+                .find(_.pick(params, ['keyword']))
                 .success(function (res) {
                     if (res.length) {
                         vm.isShowFeedback = true
@@ -56,22 +58,14 @@ export default [
                     templateUrl: './templates/navbar/popup/login.html',
                     controller: loginCtrl
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .catch(errorCatch.modal)
         }
 
         // 退出
         vm.logout = function () {
             userService
                 .signout()
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .catch(errorCatch.modal)
         }
 
         // 注册
@@ -84,13 +78,10 @@ export default [
                     templateUrl: './templates/navbar/popup/register.html',
                     controller: registerCtrl
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .catch(errorCatch.modal)
         }
 
+        // 发布商品
         vm.publish = function () {
             UibModalReset
                 .showModal({
@@ -99,11 +90,8 @@ export default [
                     templateUrl: './templates/navbar/popup/publish.html',
                     controller: publishCtrl
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .then(() => $rootScope.$broadcast('goodsPublishSuccess'))
+                .catch(errorCatch.modal)
         }
     }
 ]

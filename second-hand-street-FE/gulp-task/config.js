@@ -70,7 +70,7 @@ module.exports = {
                 ]
             }
         },
-        product: {
+        produce: {
             devtool: 'cheap-module-source-map',
             output: {
                 filename: 'bundle.[hash].js'

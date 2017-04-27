@@ -1,7 +1,7 @@
 <div class="bg-white padding-15">
     <div class="area" ng-if="vm.goods && vm.goods.length > 0">
         <div class="row">
-            <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.goods">
+            <div ui-sref="goods.details({id: item._id})" class="col-xs-3" ng-repeat="item in vm.goods">
                 <span title="取消收藏" class="sold-out" ng-click="vm.cancelCollect($event, item)">
                     <i class="text-red font-big glyphicon glyphicon-heart"></i>
                 </span>

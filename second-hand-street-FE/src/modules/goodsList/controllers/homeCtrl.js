@@ -1,8 +1,9 @@
 export default [
     'util',
     '$scope',
+    'errorCatch',
     'goodsService',
-    function (util, $scope, goodsService) {
+    function (util, $scope, errorCatch, goodsService) {
         let vm = $scope.vm = {}
 
         Promise
@@ -18,8 +19,6 @@ export default [
                 })
                 util.scrollTo(0)
             })
-            .catch(function (err) {
-                console.log(err.data.message)
-            })
+            .catch(errorCatch.modal)
     }
 ]

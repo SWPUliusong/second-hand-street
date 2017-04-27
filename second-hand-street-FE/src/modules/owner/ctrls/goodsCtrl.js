@@ -1,13 +1,13 @@
 let editCtrl = require("./popup/editCtrl")
 
 module.exports = [
-    'util',
     '$scope',
     '$timeout',
     '$rootScope',
+    'errorCatch',
     'goodsService',
     'UibModalReset',
-    function(util, $scope, $timeout, $rootScope, goodsService, UibModalReset) {
+    function ($scope, $timeout, $rootScope, errorCatch, goodsService, UibModalReset) {
         let vm = $scope.vm = {}
         let params = $scope.params = {
             status: 0,
@@ -27,20 +27,23 @@ module.exports = [
         })
 
         loadData(params);
-        
+
         function loadData(params) {
             goodsService
                 .findByUserId($rootScope.user._id, params)
                 .then(res => {
                     vm.goods = _.get(res, 'data.data', [])
                     $scope.pageValue = _.pick(_.get(res, 'data', {}), ['total', 'page', 'limit'])
-                    // util.scrollTo($scope.position)
+                    if (vm.goods.length < 1 && params.page > 1) {
+                        params.page--
+                    }
                 })
+                .catch(errorCatch.modal)
         }
 
-        vm.soldOut = function($e, item) {
+        vm.soldOut = function ($e, item) {
             $e.stopPropagation();
-            
+
             UibModalReset
                 .choose('确认商品已售出')
                 .then(() => {
@@ -50,16 +53,12 @@ module.exports = [
                     UibModalReset.info('确认成功')
                     loadData(params)
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .catch(errorCatch.modal)
         }
-        
-        vm.delete = function($e, item) {
+
+        vm.delete = function ($e, item) {
             $e.stopPropagation();
-            
+
             UibModalReset
                 .choose('确认删除商品')
                 .then(() => {
@@ -69,14 +68,10 @@ module.exports = [
                     UibModalReset.info('删除成功')
                     loadData(params)
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .catch(errorCatch.modal)
         }
-        
-        vm.edit = function($e, item) {
+
+        vm.edit = function ($e, item) {
             $e.stopPropagation();
 
             UibModalReset
@@ -87,26 +82,21 @@ module.exports = [
                     controller: editCtrl,
                     resolve: {
                         goodsDetails: [
-                            '$q',
+                            'errorCatch',
                             'goodsService',
-                            function($q, goodsService) {
-                                let defer = $q.defer()
-                                goodsService
+                            function (errorCatch, goodsService) {
+                                return goodsService
                                     .findById(item._id)
-                                    .then(res => {
-                                        defer.resolve(res.data)
-                                    })
-
-                                return defer.promise         
+                                    .then(res => res.data)
+                                    .catch(errorCatch.modal)
                             }
-                        ] 
+                        ]
                     }
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .then(() => loadData(params))
+                .catch(errorCatch.modal)
         }
+
+        $scope.$on('goodsPublishSuccess', () => loadData(params))
     }
 ]

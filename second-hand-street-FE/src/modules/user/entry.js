@@ -12,18 +12,14 @@ angular
                     controller: userCtrl,
                     resolve: {
                         user: [
-                            '$q',
+                            'errorCatch',
                             'userService',
                             '$stateParams',
-                            function ($q, userService, $stateParams) {
-                                let defer = $q.defer()
-                                userService
+                            function (errorCatch, userService, $stateParams) {
+                                return userService
                                     .findById($stateParams.id)
-                                    .then(res => {
-                                        defer.resolve(res.data)
-                                    })
-                                
-                                return defer.promise;
+                                    .then(res => res.data)
+                                    .catch(errorCatch.modal)
                             }
                         ]
                     }

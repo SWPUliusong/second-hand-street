@@ -51,11 +51,6 @@ export default [
             return $http.put(`/goods/${id}/status`)
         }
 
-        // 搜索框智能提醒
-        this.keyword = function (keyword) {
-            return $http.post('/keyword', { keyword })
-        }
-
         // 获取收藏该商品的人数
         this.getNumById = function(goods_id) {
             return $http.get(`/collections/${goods_id}/num`)

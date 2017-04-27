@@ -38,7 +38,9 @@
     <div class="form-group">
         <label class="control-label col-xs-3 font-normal text-right">价格</label>
         <div class="col-xs-7">
-            <input class="form-control" type="number" ng-model="params.price"
+            <input class="form-control"
+            type="number" step="0.01" 
+            ng-model="params.price"
             placeholder="¥">
         </div>
     </div>
@@ -65,14 +67,20 @@
     <div class="form-group">
         <label class="control-label col-xs-3 font-normal text-right">手机</label>
         <div class="col-xs-7">
-            <input class="form-control" ng-keyup="vm.change()" type="text"
-            ng-model="vm.params.tel" placeholder="手机">
+            <input class="form-control" 
+            ng-keyup="vm.change()" type="text"
+            ng-model="vm.params.tel" placeholder="手机"
+            validator="^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$"
+            origin="{{::vm.params.tel}}">
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-3 font-normal text-right">QQ</label>
         <div class="col-xs-7">
-            <input class="form-control" ng-keyup="vm.change()" type="text"
+            <input class="form-control" 
+            validator="^[1-9][0-9]{4,}$"
+            origin="{{::params.qq}}"
+            ng-keyup="vm.change()" type="text"
             ng-model="vm.params.qq" placeholder="QQ">
         </div>
     </div>

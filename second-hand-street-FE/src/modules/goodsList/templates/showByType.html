@@ -1,5 +1,9 @@
 <div class="page-content container">
-    <div class="col-xs-10 col-xs-offset-1">
+    <h3 class="col-xs-10 col-xs-offset-1 text-center padding-24" 
+    ng-if="!vm.goods || vm.goods.length < 1">
+        暂时没有此类商品正在出售
+    </h3>
+    <div class="col-xs-10 col-xs-offset-1" ng-if="vm.goods && vm.goods.length > 0 ">
         <div class="area">
             <div class="area-header">
                 <ul class="nav nav-pills">
@@ -18,7 +22,7 @@
                 </ul>
             </div>
             <div class="row">
-                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.goods">
+                <div ui-sref="goods.details({id: item._id})" class="col-xs-3" ng-repeat="item in vm.goods">
                     <img-reset img-data="item"></img-reset>
                 </div>
             </div>

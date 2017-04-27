@@ -5,7 +5,7 @@ export default [
             if (_.isFinite(input)) {
                 input = input.toString()
             }
-            return $sce.trustAsHtml(input || '暂无')
+            return $sce.trustAsHtml(input)
         }
     }
 ]

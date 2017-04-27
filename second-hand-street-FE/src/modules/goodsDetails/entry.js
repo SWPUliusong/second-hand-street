@@ -12,18 +12,14 @@ angular
                     controller: detailsCtrl,
                     resolve: {
                         goodsDetails: [
-                            '$q',
+                            'errorCatch',
                             '$stateParams',
                             'goodsService',
-                            function ($q, $stateParams, goodsService) {
-                                let defer = $q.defer()
-                                goodsService
+                            function (errorCatch, $stateParams, goodsService) {
+                                return goodsService
                                     .findById($stateParams.id)
-                                    .then(res => {
-                                        defer.resolve(res.data)
-                                    })
-
-                                return defer.promise
+                                    .then(res => res.data)
+                                    .catch(errorCatch.modal)
                             }
                         ]
                     }

@@ -3,19 +3,27 @@
     <div class="form-group">
         <label class="control-label col-xs-4 font-normal text-right">昵称</label>
         <div class="col-xs-6">
-            <input ng-keyup="change()" class="form-control" type="text" ng-model="params.name">
+            <input ng-keyup="change()" maxlength="10" class="form-control" type="text" ng-model="params.name">
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-4 font-normal text-right">手机</label>
         <div class="col-xs-6">
-            <input ng-keyup="change()" class="form-control" type="text" ng-model="params.tel">
+            <input ng-keyup="change()"
+            validator="^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$"
+            origin="{{::params.tel}}"
+            class="form-control" type="text"
+            ng-model="params.tel">
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-4 font-normal text-right">QQ</label>
         <div class="col-xs-6">
-            <input ng-keyup="change()" class="form-control" type="text" ng-model="params.qq">
+            <input ng-keyup="change()" 
+            validator="^[1-9][0-9]{4,}$"
+            origin="{{::params.qq}}"
+            class="form-control" type="text" 
+            ng-model="params.qq">
         </div>
     </div>
     <div class="form-group text-center">

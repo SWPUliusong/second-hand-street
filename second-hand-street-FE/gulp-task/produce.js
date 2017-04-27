@@ -11,10 +11,10 @@ let config = require("./config")
 
 module.exports = {
     css_compress() {
-        return gulp.src([config.LESS])
+        return gulp.src([config.LESS_MAIN])
                 .pipe(plumber())
                 .pipe(less())
-                .pipe(cleanCss())
+                .pipe(cleanCss({compatibility: 'ie8'}))
                 .pipe(gulp.dest(config.STYLES))
     },
     image_compress() {

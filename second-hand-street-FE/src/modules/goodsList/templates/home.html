@@ -18,7 +18,7 @@
                 </h3>
             </div>
             <div class="row">
-                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.recentGoods">
+                <div ui-sref="goods.details({id: item._id})" class="col-xs-3" ng-repeat="item in vm.recentGoods">
                     <img-reset img-data="item"></img-reset>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 </h3>
             </div>
             <div class="row">
-                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.collectedMostGoods">
+                <div ui-sref="goods.details({id: item._id})" class="col-xs-3" ng-repeat="item in vm.collectedMostGoods">
                     <img-reset img-data="item"></img-reset>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 </h3>
             </div>
             <div class="row">
-                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.pvMostGoods">
+                <div ui-sref="goods.details({id: item._id})" class="col-xs-3" ng-repeat="item in vm.pvMostGoods">
                     <img-reset img-data="item"></img-reset>
                 </div>
             </div>

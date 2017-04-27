@@ -2,8 +2,9 @@ let modifyBase = require('./popup/modifyBase')
 
 module.exports = [
     '$scope',
+    'errorCatch',
     'UibModalReset',
-    function ($scope, UibModalReset) {
+    function ($scope, errorCatch, UibModalReset) {
         let vm = $scope.vm = {}
 
         vm.modify = function () {
@@ -15,11 +16,7 @@ module.exports = [
                     templateUrl: './templates/owner/popup/modifyBase.html',
                     controller: modifyBase
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .catch(errorCatch.modal)
         }
     }
 ]

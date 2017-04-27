@@ -11,7 +11,7 @@ module.exports = [
         $scope.state = 'edit'
 
         let vm = $scope.vm = {}
-        let params = $scope.params = goodsDetails
+        let params = $scope.params = _.omit(goodsDetails, 'owner')
         vm.params = _.pick($rootScope.user, ['tel', 'qq'])
 
         vm.type = typeData

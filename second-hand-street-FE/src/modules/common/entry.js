@@ -1,5 +1,4 @@
 import typeData from './constant/typeData'
-import code from './constant/code'
 import htmlCompile from './htmlCompile'
 import imgReset from './imgReset'
 import trustHtml from './filters/trustHtmlFilter'
@@ -13,11 +12,12 @@ import HttpRequestInterception from './services/HttpRequestInterception'
 angular
     .module('app.common', [])
     .constant('typeData', typeData)
-    .constant('Code', code)
     .constant('regExp', require('./constant/regExp'))
     .directive('htmlCompile', htmlCompile)
     .directive('imgReset', imgReset)
     .directive('scrollTo', require("./directives/scrollTo"))
+    .directive('converter', require("./directives/converter"))
+    .directive('validator', require("./directives/validator"))
     .filter('trustHtml', trustHtml)
     .service('goodsService', goodsService)
     .service('userService', userService)
@@ -28,5 +28,6 @@ angular
     .service('util', require("./services/util"))
     .service('store', require("./services/storeService"))
     .service('fileUpload', require("./services/fileUpload"))
+    .service('errorCatch', require("./services/errorCatch"))
     .directive('pagination', require('./pagination'))
     .directive('uibDropdownReset', require('./uibDropdownReset'))

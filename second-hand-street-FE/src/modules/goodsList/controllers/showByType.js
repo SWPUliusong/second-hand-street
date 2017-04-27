@@ -3,10 +3,11 @@ export default [
     '$scope',
     'typeData',
     '$timeout',
+    'errorCatch',
     'goodsService',
     '$stateParams',
     'UibModalReset',
-    function (util, $scope, typeData, $timeout, goodsService, $stateParams, UibModalReset) {
+    function (util, $scope, typeData, $timeout, errorCatch, goodsService, $stateParams, UibModalReset) {
         let vm = $scope.vm = {},
             params = $scope.params = _.assign({}, $stateParams, {
                 page: 1,
@@ -51,7 +52,7 @@ export default [
                     $scope.pageValue = _.pick(_.get(res, 'data', {}), ['total', 'page'])
                     util.scrollTo(0, 200)
                 })
-                .catch(err => UibModalReset.info(_.get(err, 'data.message', '发生未知错误')))
+                .catch(errorCatch.modal)
         }
     }
 ]

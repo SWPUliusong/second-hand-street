@@ -1,8 +1,10 @@
 module.exports = [
     '$scope',
     '$timeout',
+    'errorCatch',
+    'UibModalReset',
     'commentService',
-    function ($scope, $timeout, commentService) {
+    function ($scope, $timeout, errorCatch, UibModalReset, commentService) {
         let vm = $scope.vm = {}
         let params = $scope.params = {
             isRead: false,
@@ -31,7 +33,11 @@ module.exports = [
                 .then(res => {
                     vm.message = _.get(res, 'data.data', [])
                     $scope.pageValue = _.pick(_.get(res, 'data', {}), ['total', 'page', 'limit'])
+                    if (vm.message.length < 1 && params.page > 1) {
+                        params.page--
+                    }
                 })
+                .catch(errorCatch.modal)
         }
 
         vm.changeRead = function () {
@@ -41,6 +47,16 @@ module.exports = [
                 params.isRead = false
             }
             params.page = 1
+        }
+
+        vm.delete = function (id) {
+            UibModalReset
+                .choose('是否删除此条评论')
+                .then(() => {
+                    return commentService.deleteByUser(id)
+                })
+                .then(() => loadData(params))
+                .catch(errorCatch.modal)
         }
     }
 ]

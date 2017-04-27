@@ -15,7 +15,7 @@
                 </h3>
             </div>
             <div class="row">
-                <div ui-sref="goods.details({id: {{item._id}}})" class="col-xs-3" ng-repeat="item in vm.goods">
+                <div ui-sref="goods.details({id: item._id})" class="col-xs-3" ng-repeat="item in vm.goods">
                     <div class="opt-btn" ng-if="params.status==0">
                         <span title="修改商品" ng-click="vm.edit($event, item)">
                             <i class="text-orange glyphicon glyphicon-pencil"></i>

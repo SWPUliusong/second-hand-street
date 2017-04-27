@@ -2,9 +2,10 @@ module.exports = [
     'user',
     '$scope',
     '$timeout',
+    'errorCatch',
     'goodsService',
     '$stateParams',
-    function (user, $scope, $timeout, goodsService, $stateParams) {
+    function (user, $scope, $timeout, errorCatch, goodsService, $stateParams) {
         let id = $stateParams.id;
         let vm = $scope.vm = {};
         let params = $scope.params = {
@@ -35,6 +36,7 @@ module.exports = [
                     vm.goods = _.get(res, 'data.data', [])
                     $scope.pageValue = _.pick(_.get(res, 'data', {}), ['total', 'page', 'limit'])
                 })
+                .catch(errorCatch.modal)
         }
     }
 ]

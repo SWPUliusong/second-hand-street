@@ -68,7 +68,7 @@ export default [
             return self.showModal(_.assign({
                 size: 'sm',
                 title: '<h3 class="padding-10 text-center bg-green text-white">提示</h3>',
-                message: `<p class="padding-15 text-center font-bigger bg-pale">${msg}</p>`,
+                message: `<p class="padding-24 text-center font-bigger bg-pale">${msg}</p>`,
                 backdrop: true,
                 keyboard: true,
                 needBtn: false
@@ -78,7 +78,7 @@ export default [
         self.choose = function (title, msg, opts) {
             let obj = {};
             if (msg) {
-                obj['message'] = `<p class="padding-15 text-center font-bigger bg-pale">${msg}</p>`
+                obj['message'] = `<p class="padding-24 text-center font-bigger bg-pale">${msg}</p>`
             }
             return self.showModal({
                 size: 'sm',

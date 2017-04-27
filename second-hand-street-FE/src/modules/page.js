@@ -67,6 +67,8 @@ angular
                 _.forEach(UibModalReset.current, function (modal) {
                     modal.dismiss();
                 });
+
+                util.scrollTo(0)
             });
 
             $rootScope.$watch('user', newVal => {

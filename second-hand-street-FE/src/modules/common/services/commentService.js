@@ -7,8 +7,8 @@ export default [
         }
 
         // 发表评论
-        this.publish = function (data) {
-            return $http.post('/messages', data)
+        this.publish = function (gid, data) {
+            return $http.post(`/goods/${gid}/messages`, data)
         }
 
         // 获取商品评论
@@ -16,9 +16,14 @@ export default [
             return $http.get(`/goods/${id}/messages`, { params })
         }
 
-        // 删除评论
+        // 删除商品下的评论
         this.delete = function (params) {
             return $http.delete(`/goods/${params.gid}/messages/${params.cid}`)
+        }
+
+        // 删除用户的消息
+        this.deleteByUser = function (id) {
+            return $http.delete(`/messages/${id}`)
         }
 
     }

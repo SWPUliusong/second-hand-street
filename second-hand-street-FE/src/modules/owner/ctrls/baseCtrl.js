@@ -2,10 +2,11 @@ let modifyPassword = require("./popup/modifyPassword")
 
 module.exports = [
     '$scope',
+    'errorCatch',
     'fileUpload',
     'userService',
     'UibModalReset',
-    function ($scope, fileUpload, userService, UibModalReset) {
+    function ($scope, errorCatch, fileUpload, userService, UibModalReset) {
 
         $scope.upload = function (file) {
             if (!file) return
@@ -17,11 +18,7 @@ module.exports = [
                         avatar: filename
                     })
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .catch(errorCatch.modal)
         }
 
         $scope.modifyPassword = function () {
@@ -36,11 +33,7 @@ module.exports = [
                 .then(res => {
                     UibModalReset.info('修改成功')
                 })
-                .catch(err => {
-                    // 
-                    // Error catch
-                    // 
-                })
+                .catch(errorCatch.modal)
         }
     }
 ]
