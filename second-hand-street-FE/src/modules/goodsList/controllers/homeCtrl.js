@@ -20,5 +20,11 @@ export default [
                 util.scrollTo(0)
             })
             .catch(errorCatch.modal)
+
+        $scope.$on('goodsPublishSuccess', () => {
+            goodsService
+                .getRecent()
+                .success(data => vm.recentGoods = data)
+        })
     }
 ]

@@ -54,5 +54,12 @@ export default [
                 })
                 .catch(errorCatch.modal)
         }
+
+        $scope.$on('goodsPublishSuccess', () => {
+            if(params.page == 1) {
+                loadData(params)
+            }
+            return
+        })
     }
 ]
