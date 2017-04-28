@@ -33,10 +33,8 @@ export default [
             goodsService
                 .find(_.pick(params, ['keyword']))
                 .success(function (res) {
-                    if (res.length) {
-                        vm.isShowFeedback = true
-                        vm.goods = res
-                    }
+                    vm.isShowFeedback = true
+                    vm.goods = res
                 })
         }
 

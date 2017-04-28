@@ -10,6 +10,9 @@
             <span class="text-green glyphicon glyphicon-search"></span>
             <input type="text" ng-model="params.keyword" class="form-control" ng-keyup="vm.search($event)" placeholder="搜索">
             <ul class="intellisense" ng-if="vm.isShowFeedback">
+                <li ng-if="vm.goods.length < 1">
+                    <a class="text-white text-center">搜索不到相关的商品</a>
+                </li>
                 <li ng-repeat="good in vm.goods track by $index">
                     <a class="text-white" ng-click="params.keyword=null" ui-sref="goods.details({id: good._id})">{{good.title}}</a>
                 </li>
