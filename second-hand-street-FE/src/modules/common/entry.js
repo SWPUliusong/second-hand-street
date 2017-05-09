@@ -6,6 +6,7 @@ import goodsService from './services/goodsService'
 import userService from './services/userService'
 import validService from './services/validService'
 import commentService from './services/commentService'
+import demandService from './services/demandService'
 import UibModalReset from './uibModalResetService'
 import HttpRequestInterception from './services/HttpRequestInterception'
 
@@ -23,6 +24,7 @@ angular
     .service('userService', userService)
     .service('validService', validService)
     .service('commentService', commentService)
+    .service('demandService', demandService)
     .service('UibModalReset', UibModalReset)
     .service('HttpRequestInterception', HttpRequestInterception)
     .service('util', require("./services/util"))

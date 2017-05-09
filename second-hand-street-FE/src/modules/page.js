@@ -10,6 +10,7 @@ import './goodsDetails/entry'
 import './reading'
 import './owner/entry'
 import './user/entry'
+import './demand/entry'
 
 angular
     .module('app', [
@@ -22,6 +23,7 @@ angular
         'app.reading',
         'app.owner',
         'app.user',
+        'app.demand'
     ])
     .constant('httpConfig', {
         NAME: 'second-hand-street',
@@ -59,9 +61,10 @@ angular
             validService.userSync()
 
             $rootScope.$on("$stateChangeStart", function (event, toState) {
-                if (/^owner/.test(toState.name) && !$rootScope.user) {
+                let flag = /^owner/.test(toState.name) || /demand\.publish/.test(toState.name)
+                if ( flag && !$rootScope.user) {
                     event.preventDefault();
-                    return
+                    return UibModalReset.info('尚未登录')
                 }
 
                 _.forEach(UibModalReset.current, function (modal) {
@@ -72,7 +75,7 @@ angular
             });
 
             $rootScope.$watch('user', newVal => {
-                if (!newVal && $state.includes('owner')) {
+                if (!newVal && ($state.includes('owner') || $state.includes('demand.publish'))) {
                     $state.go('goods.home')
                 }
             })

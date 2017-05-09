@@ -30,5 +30,10 @@ angular
                     templateUrl: './templates/owner/message.html',
                     controller: require('./ctrls/messageCtrl')
                 })
+                .state('owner.demand', {
+                    url: '/demand',
+                    templateUrl: './templates/owner/demand.html',
+                    controller: require('./ctrls/demandCtrl')
+                })
         }
     ])

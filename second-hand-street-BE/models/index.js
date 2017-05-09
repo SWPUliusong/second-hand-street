@@ -8,5 +8,6 @@ mongoose.Promise = global.Promise
 module.exports = {
     User: require("./user"),
     Goods: require("./goods"),
-    Message: require("./message")
+    Message: require("./message"),
+    Demand: require("./demand"),
 }

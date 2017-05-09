@@ -1,0 +1,43 @@
+<div class="page-content container demand">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="padding-15 demand-title text-center">
+            <img src="./images/demand-title.png">
+        </div>
+        <div class="padding-15 text-center">
+            <button class="btn demand-btn" ui-sref="demand.publish">发布需求</button>
+        </div>
+        <div class="user-big-avatar bg-white" ng-repeat="item in vm.demand">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div class="profile-avatar">
+                        <img  ui-sref="user({id: item.user._id})" ng-src="{{item.user.avatar}}" alt="{{vm.user.name}}">
+                    </div>
+                </div>
+                <div class="col-xs-10 demand-body text-init">
+                    <h4 class="text-green">
+                        [求购] {{item.title}}
+                        <a ng-if="item.uid === user._id" ng-click="vm.delete(item._id)" class="text-green pull-right size-init">删除</a>
+                    </h4>
+                    <p>{{item.details}}</p>
+                    <p>
+                        期望价格：<span class="text-red">{{item.price | currency: '￥'}}</span> &nbsp;&nbsp;
+                        交易地点：<span class="text-green">{{item.place}}</span> &nbsp;&nbsp;
+                        <time>{{item.publishTime | date: 'yyyy-MM-dd HH:mm:ss'}}</time>
+                    </p>
+                    <p>
+                        <span class="user-name" ui-sref="user({id: item.user._id})">
+                            <i class="glyphicon glyphicon-user"></i> &nbsp; {{item.user.name}}
+                        </span> &nbsp; &nbsp; &nbsp; &nbsp;
+
+                        <span class="user-connect">
+                            <i class="glyphicon glyphicon-phone-alt"></i>&nbsp;&nbsp;
+                            <span ng-if="item.user.tel">手机：{{item.user.tel}}</span>&nbsp;&nbsp;
+                            <span ng-if="item.user.qq">qq：{{item.user.qq}}</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <pagination></pagination>
+    </div>
+</div>

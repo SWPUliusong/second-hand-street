@@ -18,6 +18,7 @@ module.exports = [
                 })
 
                 function renderView(event) {
+                    if (!_.get(scope, key)) return
                     if (!$regex.test(_.get(scope, key))) {
                         let val = attrs.origin || ''
                         scope.$apply(() => _.set(scope, key, val))

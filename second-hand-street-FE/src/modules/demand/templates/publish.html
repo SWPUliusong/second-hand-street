@@ -1,0 +1,56 @@
+<div class="page-content container">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="text-center logo-header">
+            <img src="./images/logo.png" alt="logo">
+            <h3 class="text-center text-green font-bold">发布需求</h3>
+        </div>
+        <form class="form-horizontal publish" ng-submit="vm.submit()">
+            <div class="form-group">
+                <label class="control-label col-xs-3 font-normal text-right">商品名称</label>
+                <div class="col-xs-7">
+                    <input maxlength="18" class="form-control" type="text" ng-model="params.title" placeholder="最大长度为18">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3 font-normal text-right">商品详情</label>
+                <div class="col-xs-7">
+                    <textarea rows="3" maxlength="270" class="form-control" ng-model="params.details" placeholder="建议填写你对商品的详细要求，规格参数等,270字以内"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3 font-normal text-right">交易地点</label>
+                <div class="col-xs-7">
+                    <input maxlength="15" class="form-control" type="text" ng-model="params.place" placeholder="宿舍,教学楼,食堂等(字数15以内)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3 font-normal text-right">价格</label>
+                <div class="col-xs-7">
+                    <input class="form-control" type="number" step="0.01" max="20000.00" placeholder="(¥) 最大20000" ng-model="params.price">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-4 font-normal text-right">联系方式(至少选填一样)</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3 font-normal text-right">手机</label>
+                <div class="col-xs-7">
+                    <input class="form-control" ng-keyup="vm.change()" type="text" ng-model="vm.params.tel" placeholder="手机" validator="^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$"
+                        origin="{{::vm.params.tel}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3 font-normal text-right">QQ</label>
+                <div class="col-xs-7">
+                    <input class="form-control" validator="^[1-9][0-9]{4,}$" origin="{{::vm.params.qq}}" ng-keyup="vm.change()" type="text" ng-model="vm.params.qq"
+                        placeholder="QQ">
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" ng-disabled="!params.title || !params.details 
+        || !params.place || !params.price || !(vm.params.tel || vm.params.qq)"
+        class="login-btn btn bg-green">发布需求</button>
+            </div>
+        </form>
+    </div>
+</div>

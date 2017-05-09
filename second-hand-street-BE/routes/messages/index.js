@@ -27,20 +27,3 @@ exports.get = [
         }
     }
 ]
-
-exports.delete = [
-    validator.isLogin(),
-    (cxt, next) => {
-        let id = cxt.params.id
-        if (id) return next()
-        throw {status: 400, code: 40003}
-    },
-    cxt => {
-        let to = cxt.session.user._id
-        let _id = cxt.params.id
-
-        Message.remove({_id, to})
-
-        cxt.status = 204
-    }
-]
