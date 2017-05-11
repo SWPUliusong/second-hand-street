@@ -1,14 +1,16 @@
 module.exports = [
     'util',
+    '$state',
     '$scope',
     '$timeout',
     'errorCatch',
     'userService',
     'validService',
+    'goodsService',
     'goodsDetails',
     'UibModalReset',
     'commentService',
-    function (util, $scope, $timeout, errorCatch, userService, validService, goodsDetails, UibModalReset, commentService) {
+    function (util, $state, $scope, $timeout, errorCatch, userService, validService, goodsService, goodsDetails, UibModalReset, commentService) {
         util.scrollTo(0)
         
         let vm = $scope.vm = {}
@@ -27,12 +29,6 @@ module.exports = [
             value: vm.goods.images[0]
         }
 
-        // 验证是否已收藏
-        if ($scope.user) {
-            validService
-                .collections(goodsDetails._id)
-                .then(res => vm.isCollect = res.data.flag)
-        }
 
         // 收藏或取消收藏
         vm.collect = function () {
@@ -60,6 +56,20 @@ module.exports = [
         }
 
         $scope.$watch('params.page', loadData)
+
+        // 验证收藏和重取商品信息
+        const updateInfo = function () {
+            validService
+                .collections(goodsDetails._id)
+                .then(res => vm.isCollect = res.data.flag)
+        
+            goodsService
+                .findById(goodsDetails._id)
+                .then(res => vm.goods = res.data)
+                .catch(errorCatch.modal)
+        }
+        // 监听登录，更新状态
+        $scope.$watch('user', updateInfo)
 
         // 防止多次加载
         let timer;

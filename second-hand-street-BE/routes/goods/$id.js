@@ -43,6 +43,12 @@ exports.get = async cxt => {
     }
 
     let owner = await User.getOwnerById(goods.uid)
+
+    // 若尚未登录，则抹掉联系方式信息
+    if (!cxt.session.user) {
+        owner.tel = owner.tel && '登陆后显示'
+        owner.qq = owner.qq && '登陆后显示'
+    }
     
     goods.owner = owner
 
