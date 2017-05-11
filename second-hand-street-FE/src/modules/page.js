@@ -61,7 +61,7 @@ angular
             validService.userSync()
 
             $rootScope.$on("$stateChangeStart", function (event, toState) {
-                let flag = /^owner/.test(toState.name) || /demand\.publish/.test(toState.name)
+                let flag = /^owner/.test(toState.name) || /^demand/.test(toState.name)
                 if ( flag && !$rootScope.user) {
                     event.preventDefault();
                     return UibModalReset.info('尚未登录')
@@ -75,7 +75,7 @@ angular
             });
 
             $rootScope.$watch('user', newVal => {
-                if (!newVal && ($state.includes('owner') || $state.includes('demand.publish'))) {
+                if (!newVal && ($state.includes('owner') || $state.includes('demand'))) {
                     $state.go('goods.home')
                 }
             })

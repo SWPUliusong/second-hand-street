@@ -28,9 +28,11 @@ module.exports = [
         }
 
         // 验证是否已收藏
-        validService
-            .collections(goodsDetails._id)
-            .then(res => vm.isCollect = res.data.flag)
+        if ($scope.user) {
+            validService
+                .collections(goodsDetails._id)
+                .then(res => vm.isCollect = res.data.flag)
+        }
 
         // 收藏或取消收藏
         vm.collect = function () {
