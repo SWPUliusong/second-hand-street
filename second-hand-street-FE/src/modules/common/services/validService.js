@@ -3,8 +3,8 @@ export default [
     '$rootScope',
     function ($http, $rootScope) {
         // 确认邮箱是否注册
-        this.email = function (data) {
-            return $http.post('/valid/email', data)
+        this.email = function (email) {
+            return $http.post('/valid/email', { email })
         }
 
         // 确认商品是否收藏
