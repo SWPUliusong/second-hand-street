@@ -6,7 +6,7 @@
   "scripts": {
     "test": "gulp mock",
     "start": "gulp proxy",
-    "produce": "gulp app"
+    "build": "gulp app"
   },
   "repository": {
     "type": "git",

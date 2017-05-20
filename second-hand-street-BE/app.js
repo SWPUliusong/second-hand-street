@@ -10,9 +10,7 @@ const frouter = require("./frouter")
 let app = new Koa()
 let config = require("./common").config
 
-if (app.env === 'development') {
-    app.use(logger())
-}
+app.use(logger())
 
 app.use(async (cxt, next) => {
     try {

@@ -7,7 +7,7 @@ exports.get = async cxt => {
         cxt.body = await Goods.findByKeyword(query.keyword)
     } else {
         let col = await Promise.all([
-            Goods.find(query),
+            Goods.find(_.assign({}, query, {status: 0}), ['type', 'subtype', 'status']),
             Goods.count(_.pick(query, ['type', 'subtype']))
         ])
 

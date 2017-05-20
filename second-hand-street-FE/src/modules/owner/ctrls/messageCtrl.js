@@ -51,7 +51,7 @@ module.exports = [
 
         vm.delete = function (id) {
             UibModalReset
-                .choose('是否删除此条评论')
+                .choose('是否删除此条消息')
                 .then(() => {
                     return commentService.deleteByUser(id)
                 })
