@@ -10,6 +10,7 @@
 node_modules
 debug*.log
 node-debug.log
+error.log
 
 # cache files
 temp
