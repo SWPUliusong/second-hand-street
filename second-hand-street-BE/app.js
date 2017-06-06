@@ -41,4 +41,4 @@ app.use(cxt => {
     throw error
 })
 
-app.listen(config.port, () => console.log('listening on http://localhost:' + config.port))
+app.listen(config.port, () => console.log('listening on ' + config.port))
